@@ -18,7 +18,7 @@
 
 **效果：**
 
-<img src="C:%5CUsers%5CDELL%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200403203522586.png" alt="image-20200403203522586" style="zoom: 67%;" />
+![大纲](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/20200404090031.png)
 
 ## （二）. 标注
 
