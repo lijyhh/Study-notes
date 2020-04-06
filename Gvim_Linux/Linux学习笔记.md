@@ -1,4 +1,4 @@
-[Linux学习网站](man.linuxde.net)
+Linux学习网站](man.linuxde.net)
 
 # 一．Linux基础知识
 
@@ -143,6 +143,22 @@ Var：存放的程序/系统的日志文件的目录。
 Mnt：当外接设备需要挂载的时候，就需要挂载到mnt目录下。
 
 Boot：操作系统启动的时候产生的一些文件，boot：启动，开机
+
+```
+/bin:
+bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp、chmod df、dmesg、gzip、kill、ls、mkdir、more、mount、rm、su、tar等。 
+
+/usr/bin:
+主要放置一些 应用软体工具 的必备执行档例如c++、g++、gcc、chdrv、diff、dig、du、eject、elm、free、gnome*、 gzip、htpasswd、kfm、ktop、last、less、locale、m4、make、man、mcopy、ncftp、 newaliases、nslookup passwd、quota、smb*、wget等。 
+
+/sbin:
+主要放置一些 系统管理 的必备程式例如:cfdisk、dhcpcd、dump、e2fsck、fdisk、halt、ifconfig、ifup、 ifdown、init、insmod、lilo、lsmod、mke2fs、modprobe、quotacheck、reboot、rmmod、 runlevel、shutdown等。 
+
+/usr/sbin: 
+放置一些 网路管理 的必备程式例如:dhcpd、httpd、imap、in.*d、inetd、lpd、named、netconfig、nmbd、samba、sendmail、squid、swap、tcpd、tcpdump等。 
+```
+
+
 
 # 四．Linux的基本指令
 
@@ -612,7 +628,7 @@ c：表示bytes，字节数
 
 指令：`#ps`
 
-作用：主要是查看服务器的进程信息选项含义：
+作用：主要是查看服务器的**进程信息**选项含义：
 
 ```
 -e：等价于“-A”，表示列出全部的进程
@@ -708,7 +724,7 @@ l：当服务器拥有多个cpu的时候可以使用“l”快捷键来切换是
 
 ### 6、du -sh指令
 
-作用：查看**目录的真实大小**
+作用：查看目录的真实大小
 
 语法：`#du -sh 目录路径`
 
@@ -757,7 +773,7 @@ l：当服务器拥有多个cpu的时候可以使用“l”快捷键来切换是
 案例：使用find 来搜索/etc/sane.d/目录下所有的文件
 
 ```
-#find/etc/sane.d/-type f
+#find /etc/sane.d/ -type -
 ```
 
 案例：使用find 来搜索/etc/目录下所有的文件夹
@@ -776,23 +792,25 @@ l：当服务器拥有多个cpu的时候可以使用“l”快捷键来切换是
 
 \#service httpd start
 
+![httpd](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200407000233.png)
+
 ### 9、kill 指令（重点）
 
 作用：表示杀死进程（当遇到僵尸进程或者出于某些原因需要关闭进程的时候）
 
 语法：`#kill 进程PID（语法需要配合ps一起使用）`
 
- 
+![kill](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200407000427.png)
 
 与kill命令作用相似但是比kill更加好用的杀死进程的命令：killall
 
 语法：`#killall 进程名称`
 
-
+![killall](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200407000652.png)
 
 案例：寻找并杀死僵尸进程
 
-```js
+```
 ps -A -o stat,ppid,pid,cmd | grep -e '^[Zz]'
 ```
 
@@ -1218,9 +1236,13 @@ c.输入需要计算的内容，按下回车
 
 ### 2、异常退出
 
-什么是异常退出：在编辑文件之后并没有正常的去wqg（保存退出），而是遇到突然关闭终端或者断电的情况，则会显示下面的效果，这个情况称之为异常退出；
+什么是异常退出：在编辑文件之后并没有正常的去wq（保存退出），而是遇到突然关闭终端或者断电的情况，则会显示下面的效果，这个情况称之为异常退出；
+
+![yichang](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200407002805.png)
 
 解决办法：将交换文件（在编程过程中产生的临时文件）删除掉即可
+
+![delete](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200407003325.png)
 
 ### 3、别名机制
 
@@ -1384,7 +1406,7 @@ usermod:user modify，用户修改常用选项：
 -g：表示指定用户的用户主组，选项的值可以是用户组的id，也可以是组名
 -G：表示指定用户的用户附加组，选项的值可以是用户组的id，也可以是组名
 -u:uid，用户的id（用户的标识符），系统默认会从500之后按顺序分配uid，如果不想使用系统分配的，可以通过该选项自定义【类似于腾讯QQ的自选靓号情况】
--l：修改用户名名
+-l：修改用户名
 ```
 
 案例：修改zhangsan用户主组为500，附加组改为501
@@ -1392,7 +1414,7 @@ usermod:user modify，用户修改常用选项：
 
 案例：修改zhangsan用户用户名，改为wangerma
 
-#usermod -l 新的用户名 旧的用户名T
+#usermod -l 新的用户名 旧的用户名
 
 #usermod -l wangerma zhangsan
 
@@ -1500,7 +1522,8 @@ Linux系统对用户组的规定有所不同，如Linux下的用户属于与它�
 
 ![改名](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406002710.png)
 
-2.3 用户组删除
+#### 2.3 用户组删除
+
 常用语法：`#groupdel 用户组名`
 
 ![del](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406002813.png)
@@ -1510,3 +1533,872 @@ Linux系统对用户组的规定有所不同，如Linux下的用户属于与它�
 注意：当如果需要删除一个组，但是这个组是某个用户的主组时，则不允许删除；如果确实需要删除，则先从组内移出所有用户。
 
 ![yichu](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406003332.png)
+
+## 三、网络设置
+
+首先知道网卡配置文件位置：/etc/sysconfig/network-scripts
+
+![net](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406115118.png)
+
+在目录中网卡的配置文件命名格式：ifcfg-网卡名称
+
+![eth0](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406115520.png)
+
+```
+ONBOOT：是否开机启动
+BOOTPROTO:ip地址分配方式，DHCP表示动态主机分配协议
+HWADDR：硬件地址，MAC地址
+```
+
+如果后续需要重启网卡怎么去操作呢？
+
+```
+#service network restart
+```
+
+![restart](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406115751.png)
+
+在有的分支版本中可能没有service命令来快速操作服务，但是有一个共性的目录：/etc/init.d这个目录中放着很多服务的快捷方式。
+此处重启网卡命令还可以使用：
+#/etc/init.d/network restart 
+
+![res](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406120202.png)
+
+**扩展：**如果修改网卡的配置文件，但是配置文件的目录层次很深，此时可以在浅的目录中创建一个快捷方式（软连接），方便以后去查找
+#ln -s原始文件的路径快捷方式的路径
+
+![ln](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406120542.png)
+
+通过ls-l可以列出如下的效果：
+
+![l](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406120723.png)
+
+其中，文件类型位置的“l”表示其类型为link（连接类型），后面的“->”指向的是原始文件路径
+
+**扩展2：**如何去重启单个网卡？
+停止某个网卡：#ifdown 网卡名 
+
+开启某个网卡：#ifup 网卡名
+
+例如：需要停止-启动（重启）eth0网卡，则可以输入
+
+```
+#ifdown eth0
+
+#ifup eth0
+```
+
+提示：在实际工作的时候不要随意禁网卡
+
+## 四、ssh服务（重点）
+
+ssh（secure shell，安全外壳协议），该协议有2个常用的作用：远程连接协议、远程文件传输协议。
+
+协议使用端口号：默认是22
+
+可以是被修改的，如果需要修改，则需要修改ssh服务的配置文件：
+
+#/etc/ssh/ssh config
+
+![ssh](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406125912.png)
+
+端口号可以修改，但是得注意2个事项：
+
+```
+a.注意范围，端口范围是从0-65535；
+
+b.不能使用别的服务已经占用的端口；
+```
+
+服务启动/停止/重启
+
+```
+#service sshd start/stop/restart
+
+#/etc/init.d/sshd start/stop/restart
+```
+
+![sshd](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406130328.png)
+
+### 1、远程终端
+
+终端工具主要帮助运维人员连接远程的服务器，常见终端工具有：Xshell、secureCRT、Putty等。以putty为例：
+
+- 获取服务器ip地址，可以通过ifconfig命令进行查看，然后顺手测试ip的连接相通性
+
+![ping](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406130742.png)
+
+- 打开putty，输入相关的信息
+
+![putty](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406131149.png)
+
+- 在弹出key确认的时候点击“是”，以后不会再提示
+
+![yes](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406131317.png)
+
+
+
+- 输入登录信息
+
+![degnlu](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406131641.png)
+
+### 2、SSH服务文件传输
+
+可视化的界面传输工具：Filezilla
+安装好之后可以查看到桌面图标：
+
+![tubiao](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406134334.png)
+
+- 选择“文件”-“站点管理器（ctl+s）”
+
+![zhandian](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406134905.png)
+
+- 连接之后的效果
+
+![jiemian](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406135146.png)
+
+- 从本地windows上传文件到linux中方式
+
+   支持直接拖拽文件，也可以右键本地需要上传的文件，然后点选“上传”即可
+
+- 下载linux文件到本地
+
+  支持服务器文件直接拖拽到本地，也可以在右侧窗口选择需要下载的文件，右键，点选“下载”
+
+**扩展3：通过命令行工具来传输文件/文件夹**
+工具：PSCP.exe （必须通过cmd命令行打开），为了使用方便可以将其放到环境变量目录中
+
+如果不清楚哪些路径是环境变量路径，只需要将其放到C:/Windows目录下即可。
+
+![pscp](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406140543.png)
+
+用法：
+
+```
+a.pscp 选项 用户名@linux主机地址:资源路径 windows本地的地址（下载到win）
+b.pscp 选项 资源路径 用户名@linux主机地址:远程路径 （上传到linux）
+c.pscp 选项 -ls 用户名@linux主机地址  （列出远程路径下结构）
+```
+
+```
+#pscp -r root@192.168.21.128:/etc E:\tmp
+```
+
+在CMD中输入之后输入密码
+
+![pscp1](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406142433.png)
+
+- 上传文件到linux
+  将“E:\coursedocs”所有的内容传输到linux下root用户的家目录
+
+```
+#pscp -r “E:\coursedocs” root@192.168.21.128:/root
+```
+
+# 八. Linux自有服务（2）
+
+## 一、设置主机名
+
+- 回顾：
+
+  ```
+  #hostname
+  #hostname -f      FQDN（全限定域名）
+  ```
+
+- 临时设置主机名（立竿见影），需要切换用户使之生效
+  #hostname 设置的主机名
+
+- 永久设置主机名（需要重启）
+  先找到一个文件
+  /etc/sysconfig/network【主机名的配置文件】
+
+  修改其中的HOSTNAME为自己需要设置的永久主机名
+
+- 修改linux服务器的hosts文件，将yunwei指向本地hosts文件的位置（设置FQDN）：/etc/hosts
+
+  问题：不设置FQDN会怎么样？
+  ①很多开源服务器软件（例如Apache）则无法启动，或出现报错；
+  ②方便记忆，看到主机名对其作用有一个初步判断；
+  ③如果不设置则会影响本地的域名的解析（本地访问）；
+
+## 二、chkconfig
+
+作用：相当于windows下“安全卫士”、“电脑管家”之类的安全辅助工具提供“开机启动项”的一个管理服务。
+在linux下不是所有的软件安装完成之后都有开机启动服务，有的可能需要自己去添加。除此之外还可以查看和删除。
+
+#### 1. 开机启动服务查询
+
+#chkconfig --list
+
+![list](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406152144.png)
+
+其中0-6表示各个启动级别
+例如：以httpd为例，其3级别为关闭（off），则表示其在3启动形式下默认不启动;
+
+5对应的也是关闭，则表示其在桌面环境下也是开机不启动。
+
+再例如：kdump服务(记录系统崩溃的)，在2，3，4，5的级别下默认开机启动的，其他级别下默认开机不启动
+
+#### 2.删除服务
+
+#chkconfig --del 服务名
+例如：删除httpd服务
+
+![del](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406153143.png)
+
+#### 3.添加开机启动服务
+
+#chkconfig --add 服务名(注：服务和进程不一样，必须保证service start能运行)【必须要保证服务正常运行，才可以添加】
+
+#### 4.设置服务在某个级别下开机启动/不启动【重点命令】
+
+#chkconfig --level 连在一起的启动级别 服务名 开/关（on/off）
+
+案例：设置httpd服务在3，5级别下默认开机启动
+
+![level](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406154526.png)
+
+案例：设置httpd服务在5的级别下默认开机不启动
+
+![off](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406154648.png)
+
+## 三、ntp服务
+
+作用：ntp主要是用于对计算机的时间同步管理操作。
+时间是对服务器来说是很重要的，一般很多网站都需要读取服务器时间来记录相关信息，如果时间不准，则可能造成很大的影响。
+
+同时服务器时间方式有2个：一次性同步（手动同步）、通过服务自动同步。
+
+上游的概念：
+
+![shangyou](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406160500.png)
+
+### 1.一次性同步时间（简单）
+
+#ntpdate 时间服务器的域名或ip地址
+ip地址查看可以访问：http://www.ntp.org.cn/pool.php
+
+![update](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406160945.png)
+
+### 2.设置时间同步服务
+
+服务名：ntpd
+启动ntpd服务
+
+```
+#service ntpd start 或者 /etc/init.d/ntpd start
+```
+
+### 3.设置ntpd服务开机启动：
+
+#chkconfig --list|grep ntpd
+#chkconfig --level 35 ntpd on
+
+## 四、防火墙服务
+
+防火墙：防范一些网络攻击。有软件防火墙、硬件防火墙之分。
+
+![fanghuoqiang](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406162421.png)
+
+防火墙选择让请求通过，从而保证网络安全性。
+
+在当前的centos6.5中防火墙有一个名称：iptables(软件名和服务名)【7.x中默认使用的是firewalld】
+
+### 1.查看iptables是否开机启动
+
+![qidong](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406163006.png)
+
+### 2.iptables 服务启动/重启/关闭
+
+```
+#service iptables start/restart/stop
+/etc/init.d/iptables start/stop/restart
+```
+
+### 3.查看iptables的状态（规则）
+
+```
+#service iptables status
+```
+
+如果iptables没有启动，则提示服务没启动，如果已经启动，则显示防火墙的相关的规则
+
+![iptables](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406164732.png)
+
+### 4.查看规则的命令
+
+```
+#iptables -L -n
+```
+
+含义：
+-L：表示列出规则
+-n：表示将单词表达形式改成数字形式显示
+
+### 5.简单设置防火墙规则
+
+```
+#允许本地回环接口（即运行本机访问本机）
+iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT 
+#允许已建立的或相关连的通行
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+#允许所有本机向外的访问
+iptables -A OUTPUT -j ACCEPT
+#允详访问22端口
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+#允许访问80端口
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+#允许ftp服务的21端口
+iptables -A INPUT -p tcp --dport 21 -j ACCEPT
+#允许FTP服务的20端口
+iptables -A INPUT -p tcp --dport 20 -j ACCEPT
+#禁止其他未允许的规则访问
+iptables -A INPUT -j reject
+#禁正其他未允许的规则访问
+iptables -A FORWARD -j REJECT（大小写都行）
+
+iptables：主命令
+-A:add，添加规则
+INPUT：进站请求【出站 output】
+-p:protocol，指定协议（icmp/tcp/upd）
+--dport：指定端口号
+-j：指定行为结果，允许（accept）/禁止（reject）
+```
+
+添加完成之后需要保存操作：
+
+```
+/etc/init.d/iptables save
+```
+
+## 五、rpm管理（重点）
+
+作用：rpm的作用类似于windows上的电脑管家中“软件管理”、安全卫士里面“软件管家”等产品，主要作用是对linux服务器上的软件包进行对应管理操作，管理分为：**查询、卸载、安装**。
+
+### 1.查询某个软件的安装情况
+
+#rpm -ga|grep 关键词
+
+选项：
+
+```
+-q：查询，query
+-a：全部，all
+```
+
+### 2.卸载某个软件
+
+#rpm -e 软件的名称
+
+![xiezai](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406174226.png)
+
+火狐卸载的时候是没有依赖关系的，所以可以直接卸载。
+但是在卸载Apache的时候提示无法卸载：
+
+![yilai](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406174528.png)
+
+#rpm -e 软件包名 --nodeps(dependency依赖)
+
+![nodeps](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406174853.png)
+
+### 3.软件的安装
+
+要想装软件，和windows下一样，先得找到安装包。
+软件包的获得方式：
+
+```
+a.去官网去下载；
+
+b.不介意老版本的话，可以从光盘（或者镜像文件）中读取；
+```
+
+此处以光盘文件为例：
+查看块状设备的信息：
+#lsblk（list block devices）查看块状设备(光盘/u盘等)的信息
+
+![lsblk](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406181351.png)
+
+```
+Name：名称
+Size：设备大小
+Type：类型
+MountPoint：挂载点（类似windows下盘符）
+```
+
+- 扩展：光盘的挂载和解挂
+  **a.解挂操作**
+  命令：umount
+  语法：`#umount 当前设备的挂载点（路径）`
+
+  此时，相当于U盘在windows上已经被弹出了，但是没有拔下电脑USB接口。
+
+  **b.挂载光盘**
+  命令：mount
+
+  语法：`#mount 设备原始地址 要挂载的位置路径`
+  设备原始地址：地址统一都在/dev下，然后根据大小确定具体name值，拼凑在一起组成原始地址，例如当前：“/dev/sro”
+  要挂载的位置路径：挂载目录一般都在mnt.下，也可以在mnt下建目录，此处以“/mnt/dvd”为例
+
+![guangpan](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406182800.png)
+
+***
+
+**安装软件的命令：**
+#rpm -ivh 软件包完整名称
+
+选项：
+
+```
+-i: install，安装
+
+-v：显示进度条
+
+-h：表示以“#”形式显示进度条
+```
+
+![ivh](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406183445.png)
+
+## 六、cron/crontab计划任务（重点）
+
+作用：操作系统不可能24小时都有人在操作，有些时候想在指定的时间点去执行任务（例如：每天夜里2点去重新启动Apache），此时不可能真有人每天夜里2点去执行命令，此时可以交给计划任务程序去执行操作。
+
+语法：#crontab选项
+常用选项：
+
+```
+-l：list，列出指定用户的计划任务列表
+
+-e:edit，编辑指定用户的计划任务列表
+
+-u:user，指定的用户名，如果不指定，则表示当前用户
+
+-r:remove，删除指定用户的计划任务列表
+```
+
+- 列出
+
+![列出](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406183949.png)
+
+编辑计划任务（重点）
+
+```
+计划任务的规则语法格式，以行为单位，一行则为一个计划：
+
+分 时 日 月 周 需要执行的命令
+
+分 时 日 月 周 需要执行的命令
+```
+
+例如：如果想要每天的0点0分执行reboot指令，
+
+则可以写成
+
+​	0 0 * * * reboot
+
+**取值范围：**
+
+```
+分：0~59
+
+时：0~23
+
+日：1~31
+
+月：1~12
+
+周：0~7，0和7表示星期天
+
+```
+
+**四个符号：**
+
+```
+*：表示取值范围中的每一个数字
+
+：做连续区间表达式的，要想表示1~7，则可以写成：1-7
+
+/：表示每多少个，例如：想每10分钟一次，则可以在分的位置写：*/10
+
+,：表示多个取值，比如想在1点，2点6点执行，则可以在时的位置写：1,2,6
+```
+
+**问题1：**每月1、10、22日的4：45重启network服务
+
+```
+45 4 1,10,22 service network restart
+```
+
+**问题2：**每周六、周日的1：10重启network服务
+
+```
+10 1 6,0 * * service network restart
+```
+
+**问题3：**每天18：00至23：00之间每隔30分钟重启network 服务
+
+```
+*/30 18-23 * * * service network restart
+```
+
+**问题4：**每隔两天的上午8点到11点的第3和第15分钟执行一次重启
+
+```
+3,15 8-11 */2 * * reboot
+```
+
+案例：真实测试案例，每1分钟往root家目录中的RT.txt中输入当前的时间信息，为了
+
+看到效果使用追加输出
+
+计划任务：
+
+```
+*/1 * * * * date +"%F %T” >> /root/RT.txt
+```
+
+Crontab权限问题：本身是任何用户都可以创建自己的计划任务。
+但是超级管理员可以通过配置来设置某些用户不允许设置计划任务(黑名单);
+配置文件位于：
+/etc/cron.deny里面写用户名，一行一个
+
+![ywq](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406194807.png)
+
+![yw](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406194646.png)
+
+还有一个配置文件：（白名单）
+/etc/cron.allow（本身不存在，自己创建）
+
+注意：白名单优先级高于黑名单，如果一个用户同时存在两个名单文件中，则会被默认允许创建计划任务。
+
+# 九、Linux 的权限管理操作
+
+Linux的权限操作与用户、用户组是兄弟操作。
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406195332.png" alt="权限" style="zoom:80%;" />
+
+
+
+## 一、权限概述
+
+总述：Linux系统一般将文件可存/取访问的身份分为3个类别：owner、group、others，且3种身份各有read、write、execute等权限。
+
+### 1、权限介绍
+
+- 什么是权限？
+  在多用户（可以不同时）计算机系统的管理中，权限是指某个特定的用户具有特定的系统资源使用权力，像是文件夹、特定系统指令的使用或存储量的限制。
+
+- 在Linux中分别有读、写、执行权限：
+  读权限：
+  对于文件夹来说，读权限影响用户是否能够列出目录结构对于文件来说，读权限影响用户是否可以查看文件内容
+- 写权限：
+  对文件夹来说，写权限影响用户是否可以在文件夹下“创建/删除/复制到/移动到”文档
+  对于文件来说，写权限影响用户是否可以编辑文件用
+- 执行权限：
+  一般都是对于文件来说，特别脚本文件。
+
+### 2、身份介绍
+
+**Owner身份**（文件所有者，默认为文档创建者）
+
+由于Linux是多用户、多任务的操作系统，因此可能常常有多人同时在某台主机上工作，但每个人均可在主机上设置文件的权限，让其成为个人的“私密文件”，即个人所有者。因为设置了适当的文件权限，除本人（文件所有者）之外的用户无法查看文件内容。
+例如某个MM给你发了一封Email情书，你将情书转为文件之后存档在自己的主文件夹中。为了不让别人看到情书的内容，你就能利用所有者的身份去设置文件的适当权限，这样，即使你的情敌想偷看你的情书内容也是做不到的。
+
+**Group身份**（与文件所有者同组的用户）
+
+与文件所有者同组最有用的功能就体现在**多个团队在同一台主机上开发资源**的时候。例如主机上有A、B两个团体，A中有a1，a2，a3三个成员，B中有b1，b2两个成员，这两个团体要共同完成一份报告F。由于设置了适当的权限，A、B团体中的成员都能互相修改对方的数据，但是团体C的成员则不能修改F的内容，甚至连查看的权限都没有。同时，团体的成员也能设置自己的私密文件，让团队的其它成员也读取不了文件数据。在Linux中，每个账户支持多个用户组。如用户al、b1即可属于A用户组，也能属于B用户组。【主组和附加组】
+
+**Others身份**（其他人）
+
+这个是个相对（相对于所有者）概念。打个比方，大明、二明、小明一家三兄弟住在一间房，房产证上的登记者是大明（owner），那么，大明一家就是一个用户组，这个组有大明、二明、小明三个成员；另外有个人叫张三，和他们三没有关系，那么这个张三就是其他人了。
+同时，大明、二明、小明有各自的房间，三者虽然能自由进出各自的房间，但是小明不能让大明看到自己的情书、日记等，这就是文件所有者（用户）的意义。
+
+**Root用户**（超级用户）
+
+在Linux中，还有一个神一样存在的用户，这就是root用户，因为在所有用户中它拥有最大的权限，所以管理着普通用户。
+
+### 3、Linux的权限介绍
+
+要设置权限，就需要知道文件的一些基本属性和权限的分配规则。在Linux中，ls命令常用来查看文件的属性，用于显示文件的文件名和相关属性。
+
+```
+#ls -l 路径      【ls -l等价于ll】
+```
+
+![权限](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406202036.png)
+
+拯红的部分就是Linux的文档权限属性信息。
+
+Linux中存在用户、用户组和其他人概念，各自有不同的权限，对于一个文档来说，其权限具体分配如下：
+
+![文档](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406202145.png)
+
+十位字符表示含义：
+
+```
+第1位：表示文档类型，取值常见的有“d表示文件夹”、“-表示文件”、“l表示软连接”、“s表示套接字“等等；
+第2-4位：表示文档所有者的权限情况，第2位表示读权限的情况，取值有r、-；第3位表示写权限的情况，w表示可写，-表示不可写，第4位表示执行权限的情况，取值有x、-。
+第5-7位：表示与所有者同在一个阻的用户的权限情况，第5位表示读权限的情况，取值有r、-；第6位表示写权限的情况，w表示可写，-表示不可写，第7位表示执行权限的情况，取值有x、-。
+第8-10位：表示除了上面的前2部分的用户之外的其他用户的权限情况，第8位表示读权限的情况，取值有r、-；第9位表示写权限的情况，w表示可写，-表示不可写，第10位表示执行权限的情况，取值有x、-。
+```
+
+权限分配中，均是rwx的三个参数组合，且位置顺序不会变化。没有对应权限就用-代替。
+
+例如：以下一个文档权限是怎么样的？
+
+![yunwei](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406215850.png)
+
+```
+a.基是文件夹类型
+b.所有者：拥有全部权限（读写执行）
+c.同组用户：可读、可执行
+d.其他用户：可读、可执行
+```
+
+## 二、权限设置
+
+语法：#chmod 选项权限模式文档
+
+注意事项：
+	常用选项：
+	-R：递归设置权限（当文档类型为文件夹的时候）
+权限模式：就是该文档需要设置的权限信息
+
+文档：可以是文件，也可以是文件夹，可以是相对路径也可以是绝对路径。
+注意点：如果想要给文档设置权限，操作者要么是root用户，要么就是文档的所有者。
+
+### 1、字母形式
+
+![shezhi](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406220428.png)
+
+给谁设置：
+
+```
+u：表示所有者身份owner（user）
+8：表示给所有者同组用户设置（group）
+o：表示others，给其他用户设置权限a：表示all，给所有人（包含ugo部分）
+```
+
+设置权限如果在设置权限的时候不指定给谁设置，则默认给所有用户设置
+
+权限字符：
+
+```
+r：读
+w：写
+x：表示执行
+-: 没有权限
+```
+
+权限分配方式：
+
+```
++：表示给具体的用户新增权限（相对当前）
+：表示删除用户的权限（相对当前）
+=：表示将权限设置成具体的值（注重结果）
+```
+
+例如：需要给anaconda-ks.cfg.文件（-rw----）设置权限，要求所有者拥有全部的权限，同组用户拥有读和执行权限，其他用户只读权限
+
+![权限](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406220758.png)
+
+答案：
+
+1. #chmod u+x,g+rx,o+r anaconda-ks.cfg
+
+![+](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406221141.png)
+
+2. #chmod u=rwx,g=rx,o=r ahaconda-ks.cfg
+
+![=](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406221420.png)
+
+例如：如果anaconda-ks.cfa文件什么权限都没有，可以使用root用户设置所有人都有执行权限，则可以写成
+
+```
+#chmod +x anaconda-ks.cfg
+#chmod a=x anaconda-ks.cfg
+#chmod a+x anaconda-ks.cfg
+```
+
+提示：当文拥有执行权限，则其颜色在终端是绿色。
+
+### 2、数字形式
+
+经常会在一些技术性的网页上看到类似于#chmod 777a.txt这样的一个权限，这种形式称之为数字形式权限（777）。
+
+```
+读：r	4
+写：w	2
+执行：x  1
+没有任何权限：0
+```
+
+![数字](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406221945.png)
+
+例如：需要给anaconda-ks.cfg设置权限，权限要求所有者拥有全部权限，同组用户拥有读热行权限，其他用户只读。
+
+```
+全部权限（u）：读+写+执行=4+2+1=7
+读和执行（g）：读+执行=4+1=5
+读权限（o）：读=4
+```
+
+由上得知权限为：754
+#chmod 754 anaconda-ks.cfg
+
+面试题：用超级管理员设置文档的权限命令是#chmod-R 731 aaa，请问这个命令有没有什么不合理的地方？
+
+```
+拥有者：7=4+2+1=读+写+执行
+同组用户：3=2+1=写+执行
+其他用户：1=1=执行
+```
+
+注意：在写权限的时候千万不要设置类似于上面的这种“奇葩权限”(只能写不能读)。但凡出现2与3的数字，则该权限有不合理的情况。
+
+### 3、注意事项
+
+使用root用户创建一个文件夹（/oo），权限默认，权限如下：
+
+![oo](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406224026.png)
+
+需要在oo目录下创建文件（oo/xx.txt）,需要给777权限：
+
+![quanxian](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406224245.png)
+
+切换到test用户（不是文档所有者，也不是同组用户，属于other部分）：
+
+```
+问题1：test用户是否可以打开oo/xx.txt文件？【能打开】
+问题2：test用户是否可以编辑 oo/xx.txt文件？【可以】
+问题3：test用户是否可以删除oo/xx.txt文件？【不可以，同样还不允许创建文件/文件夹、移动文件、重命名文件】
+```
+
+在Linux中，如果要删除一个文件，不是看文件有没有对应的权限，而是看文件所在的目录是否有写权限，如果有才可以删除
+
+## 三、属主与属组设置
+
+属主：所属的用户（文件的主人）
+属组：所属的用户组
+
+![root](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406225259.png)
+
+前面的那个root就是属主
+后面的那个root就是属组
+
+这两项信息在文档创建的时候会使用创建者的信息（用户名、用户所属的主组名称）
+
+如果有时候去删除某个用户，则该用户对应的文档的属主和属组信息就需要去修改。
+
+### 1、chown(重点)
+
+作用：更改文档的所属用户
+语法：`#chown -R username 文档路径`
+
+案例：将刚才root用户创建的oo目录，所有者更改为test
+#chown test oo/
+
+### 2、chgrp(了解)
+
+作用：更改文档的所属用户组
+语法：`#chgrp -R groupname 文档的路径`
+
+案例：将刚才root用户创建的oo目录，所有者更改为test，并且将所属用户组也改为test
+#chgrp test oo/
+
+![chgrp](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406230225.png)
+
+思考，如何通过一个命令实现既可以更改所属的用户，也可以修改所属的用户组呢？
+答：可以实现的，通过chown命令语法：`#chown -R username:groupname 文档路径`
+
+案例：要求只使用chown.指令，将oo目录的所属用户和用户组改回成root，并且包含其子目录
+
+![u:g](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406230600.png)
+
+## 四、扩展（1）
+
+问题：reboot、shutdown、init、halt、user管理，在普通用户身份上都是操作不了，但是有些特殊的情况下又需要有执行权限。又不可能让root用户把自己的密码告诉普通用户，这个问题该怎么解决？
+
+该问题是可以被解决的，可以使用**sudo**（switch user do）命令来进行权限设置。sudo可以让管理员（root）事先定义某些特殊命令谁可以执行。
+
+默认sudo中是没有除root之外用户的规则，要想使用则先配置sudo。
+Sudo 配置文件：/etc/sudoers
+
+![sodo](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406231428.png)
+
+a.配置sudo文件请使用“visudo”，打开之后其使用方法和vim一致
+
+b.配置普通用户的权限
+
+![all](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406231732.png)
+
+Root: 表示用户名，如果是用户组，则可以写成“%组名”
+
+![yonghuzu](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406232201.png)
+
+ALL：表示允许登录的主机（地址白名单）
+
+(ALL)：表示以谁的身份执行，ALL表示root身份
+
+ALL：表示当前用户可以执行的命令，多个命令可以使用“,”分割
+
+案例：本身test用户不能添加用户，要求使用sudo配置，将其设置为可以添加用户，并且可以修改密码（但是不能修改root用户密码）
+
+**注意：**在写sudo规则的时候不建议写直接形式的命令，而是写命令的完整路径。路径可以使用which命令来查看
+语法：#which 指令名称
+
+![!](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406232851.png)
+
+![vi](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406233006.png)
+
+在添加好对应的规则之后就可以切换用户，切换到普通用户test，再去执行：
+
+![error](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406233157.png)
+
+#sudo 需要执行的指令
+
+![sudo](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406233407.png)
+
+在输入sudo指令之后需要输入当前的用户密码进行确认的操作（不是root用户密码），输入之后在接下来5分钟内再次执行sudo指令不需要密码。
+
+特别注意：此处按照案例要求，不能让test用户修改root密码，因此规则还需要调整，不然其可以修改root 密码的：
+
+禁止修改 root 密码的配置：/usr/bin/passwd[A-Za-z]*，！/usr/bin/passwd root
+
+![!sudo](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406234620.png)
+
+补充：在普通用户下怎么查看自己具有哪些特殊权限呢？
+#sudo -l
+
+![sudo-l](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406234835.png)
+
+最后：sudo不是任何Linux分支都有的命令，常见centos与ubuntu都存在sudo命令。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
