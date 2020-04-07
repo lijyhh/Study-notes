@@ -1,4 +1,4 @@
-Linux学习网站](man.linuxde.net)
+[Linux学习网站](man.linuxde.net)
 
 # 一．Linux基础知识
 
