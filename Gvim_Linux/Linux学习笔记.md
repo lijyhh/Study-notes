@@ -1,4 +1,4 @@
-[Linux学习网站](https://man.linuxde.net/)
+<img src="https://i.loli.net/2020/04/07/J3twqzMG7KBkiZY.png"/<img src="https://i.loli.net/2020/04/07/kGTPhDr4eoSxLEH.png"/>[<img src="https://i.loli.net/2020/04/07/kGTPhDr4eoSxLEH.png"/>Linux学习网站](https://man.linuxde.net/)
 
 # 一．Linux基础知识
 
@@ -2373,6 +2373,631 @@ ALL：表示当前用户可以执行的命令，多个命令可以使用“,”�
 ![sudo-l](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200406234835.png)
 
 最后：sudo不是任何Linux分支都有的命令，常见centos与ubuntu都存在sudo命令。
+
+# 十. Linux的网络基础
+
+## 一、网络相关概述
+
+### 1、网络发展
+
+**信息传递**
+■远古时期，人们就通过简单的语言、壁画等方式交换信息
+■千百年来，人们一直在用语言、图符、钟鼓、烟火、竹简、纸书等传递信息
+■古代人的烽火狼烟、飞鸽传信、骚马邮递现代社会中，交通警的指挥手语、航海中的旗语等
+■这些信息传递的基本方式都是依靠人的视觉与听觉电的产生
+■1831年，法拉第制出了世界上最早的第一台发电机
+■1866年，德国人西门子（Siemens）制成世界上第一台大功率发电机
+■1837年，美国人塞缪乐·莫乐斯成功地研制出世界上第一台电磁式电报机
+
+■1844年5月24日，莫乐斯在国会大厦联邦最高法院会议厅进行了“用莫尔斯电码”
+发出了人类历史上的第一份电报，从而实现了长途电报通信
+
+**网络诞生**
+■1957年，前苏联发射了第一颗人造卫星，震惊了美国
+■1958年美国成立了国防部高级研究计划署（ARPA，Advanced Research Projects Agency），应对冷战形势，ARPA是一个管理机构，没有实验室和科学家
+
+■1969年，ARPANET(阿帕网)开始联机，因此1969年被称为Internet元年
+
+**网络分类（记忆）**
+■局域网（Lodal Area Network，LAN）是指范围在几百米到十几公里内办公楼群或校园内的计算机相互连接所构成的计算机网络。
+■城域网（Metropolitan Area Network，MAN）所采用的技术基本上与局域网相类似，只是规模上要大一些。城域网既可以覆盖相距不远的几栋办公楼，也可以覆盖一个城。
+■广域网（Wide Area Network，WAN）通常跨接很大的物理范围，如一个国家。
+除了上述的划分，网络还可以按照所有者分为公网、私网是两种Internet的接入方式。
+公网接入方式：上网的计算机得到的IP地址是Internet上的非保留地址，公网的计算机和Internet上的其他计算机可随意互相访问。私网则反之。
+
+### 2、ip地址（重点）
+
+IP是英文Internet Protocol的缩写，意思是“网络之间互连的协议”，也就是为计算机网络相互连接进行通信而设计的协议。
+IP地址类型分为：**公有地址、私有地址**。
+
+- 公有地址
+  公有地址（Public address）由Inter NIC（Internet Network Information Center 因特网信息中心）负责。这些IP地址分配给注册并向Inter NIC提出申请的组织机构。通过它直接访问因特网。
+- 私有地址（重点）
+  私有地址（Private address）属于非注册地址，专门为组织机构内部使用。以下列出留用的内部私有地址：
+  A类10.0.0.0--10.255.255.255
+  B类172.16.0.0-172.31.255.255
+  C类192.168.0.0-192.168.255.255
+  IP地址按类型可以分为三类：
+
+IP地址按类型可以分为三类：
+<img src="https://i.loli.net/2020/04/07/Lof3l7SKqdGrTB2.png"/>
+
+### 3、网卡
+
+<img src="https://i.loli.net/2020/04/07/sjdQfu4o9Xcxg7l.png"/>
+
+网卡是一个网络组件，属于硬件范畴，主要负责计算机之间数据的封装和解封。
+MAC地址：网卡的物理地址，网卡设备的编号，默认情况是全球唯一的（16进制）。
+与IP地址的区别：
+	■长度不同。IP地址为32位，MAC地址为48位。
+	■分配依据不同。
+
+<img src="https://i.loli.net/2020/04/07/RA31bvY6DVtKSjJ.png"/>
+
+网络寻址方式不同。OSI参考模型，ip地址是基于第三层工作（网络层），mac地址是第二层（数据链路层）
+
+### 4、网线
+
+网钱是连接局域网必不可少的。在局域网中常见的网线主要有双绞线（RJ45接口）、铜轴电缆、光缆三种。
+
+<img src="https://i.loli.net/2020/04/07/IZFibDs2ftzSvKl.png"/>
+
+​         双绞线				铜轴电缆					光缆
+
+### 5、交换机
+
+交换机（Switch）意为“开关”，是一种用于电（光）信号转发的网络设备，交换机它可以为接入交换机的任意两个网络节点提供独享的电信号通路。
+
+<img src="https://i.loli.net/2020/04/07/MzvTeckwfmAbpxD.png"/>
+
+目前，交换机品牌比较有名的是：华为、华三（h3c）、思科、锐捷。
+
+### 6、路由器
+
+路由器（Router）又称网关设备（Gateway）是用于连接多个逻辑上分开、相对独立的网络。
+
+<img src="https://i.loli.net/2020/04/07/6QVLZO1UcKCAud4.png"/>
+
+### 7、拓扑结构图
+
+所谓“拓扑”就是把实体抽象成与其大小、形状无关的“点”，而把连接实体的线路抽象成“线”，进而以图的形式来表示这些点与线之间关系的方法，其目的在于研究这些点、线之间的相连关系。表示点和线之间关系的图被称为拓扑结构图。
+常见的几种拓扑结构图：
+
+<img src="https://i.loli.net/2020/04/07/WjHKVRNhmS1dq6E.png"/>
+
+<img src="https://i.loli.net/2020/04/07/5BxdFvReHLMs7Py.png"/>
+
+<img src="https://i.loli.net/2020/04/07/kGTPhDr4eoSxLEH.png"/>
+
+<img src="https://i.loli.net/2020/04/07/J3twqzMG7KBkiZY.png"/>
+
+## 二、网络相关命令
+
+### 1、ping
+
+作用：检测当前主机与目标主机之间的连通性（不是100%准确，有的服务器是禁ping）
+
+语法：`#ping 主机地址（ip地址、主机名、域名等）`
+
+<img src="https://i.loli.net/2020/04/07/jk4ADthqywCV7Ub.png"/>
+
+该命令可以跨平台，windows下也可以使用，语法一致。（区别在于Linux下默认一致发送，windows下默认发送4个数据包，如果加-t就可以一直发了）
+
+### 2、netstat
+
+作用：表示查看网络的连接信息
+语法：`#netstat -tnlp`（t；tcp协议，-n：将字母转化成数字，l：列出状态为监听，
+-p：显示进程相关信息）
+	  `#netstat -an` （-a：表示全部，-n：将字母转化为数字）
+
+TCP/IP协议需要使用这个命令。
+
+### 3、traceroute
+
+作用：查找当前主机与目标主机之间所有的网关（路由器，会给沿途各个路由器发送icmp数据包，路由器可能会不给响应）。该命令不是内置命令，需要安装，但是目前的已经安装好了（之前选了开发工具）。
+
+语法：`#traceroute 主机地址`
+
+<img src="https://i.loli.net/2020/04/07/tALnaerIPDxm3CF.png"/>
+
+类似于查看快递的跟踪路由；
+
+扩展：在windows下也有类似的命令：`tracert 主机地址`
+
+<img src="https://i.loli.net/2020/04/07/iGqdH5SlDz8tQ4e.png"/>
+
+在线工具网址：http://tool.chinaz.com
+
+### 4、arp地址解析协议
+
+ARP（Address Resolution Protocol），是根据IP地址获取（MAC）物理地址的协议。
+
+<img src="https://i.loli.net/2020/04/07/bkjq672xlSCKGeY.png"/>
+
+当一个主机发送数据时，首先查看本机MAC地址缓存中有没有目标主机的MAC地址，如果有就使用缓存中的结果；如果没有，ARP协议就会发出一个广播包，该广播包要求查询目标主机IP地址对应的MAC地址，拥有该IP地址的主机会发出回应，回应中包括了目标主机的MAC地址，这样发送方就得到了目标主机的MAC地址。如果目标主机不在本地子网中，则ARP解析到的MAC地址是默认网关的MAC地址。
+常用语法：`#arp -a`   查看本地缓存mac表
+
+`#arp -d 主机地址`   删除指定的缓存记录
+
+<img src="https://i.loli.net/2020/04/07/uHmKyY7v4QjcZJr.png"/>
+
+该命令在windows下同样适用。
+
+### 5、tcpdump（了解）
+
+作用：抓包，抓取数据表
+常用语法：
+#tcpdume 协议 port 端口
+#tcpdump 协议 port 端口 host 地址
+#tcpdump -i 网卡设备名
+
+查看22端口（ssh）的数据包：
+
+<img src="https://i.loli.net/2020/04/07/HG6ZV8C2Ye3XT7m.png"/>
+
+```
+00：09：17.xxxx 监听数据的时分秒
+IP：使用的协议类型
+192.168.21.1数据包的一个方向（来自）
+192.168.21.136数据包的另外一个方向（到达）
+```
+
+## 三、项目上线流程（必须掌握）
+
+### 1、服务器选配购买项目上线服务器必须是外网服务器。
+
+一般服务器有2种情况：购买真实服务器、购买云服务器。
+	购买真实服务器一次性成本过高，所以现在基本都是选择云服务器。
+
+云服的厂商：阿里云、腾迅云、知道创宇（加速乐）、华为云、盛大云、新浪云（sae）、亚马逊云等等。
+以后以阿里云为例：
+官网：http://www.aliyun.com
+
+①打开阿里云官网，选择产品中的“云服务器ECS”
+
+<img src="https://i.loli.net/2020/04/07/f78HlhUy9uLCpkn.png" style="zoom: 33%;" />
+
+<img src="upload%5Cimage-20200407193942555.png" alt="image-20200407193942555" style="zoom: 60%;" />
+
+②选择具体的配置
+
+<img src="https://i.loli.net/2020/04/07/SLngBQeOAxMVcIF.png"/>
+
+<img src="https://i.loli.net/2020/04/07/m8Nl3jVKstP2Co5.png"/>
+
+<img src="https://i.loli.net/2020/04/07/J8UA3XWcugQK4G6.png"/>
+
+<img src="https://i.loli.net/2020/04/07/LmhX6JAuMiUHbxv.png"/>
+
+<img src="https://i.loli.net/2020/04/07/m5MS7UQewdNZs9y.png"/>
+
+<img src="https://i.loli.net/2020/04/07/UmtzNChvs2WHjgc.png"/>
+
+<img src="https://i.loli.net/2020/04/07/Dar4RMIeT7ZOC5b.png"/>
+
+<img src="https://i.loli.net/2020/04/07/gX9Hhy7zVOspYGm.png"/>
+
+进入后台查看信息：
+
+<img src="https://i.loli.net/2020/04/07/W5ZTwElrJjpm67i.png"/>
+
+需要重置密码的话，则可以选择右侧“更多”选择“重置密码”，后重启服务器，最后可以通过远程终端连接服务器：
+
+<img src="https://i.loli.net/2020/04/07/tYSpwhQZRPoNALf.png"/>
+
+### 2、域名购买
+
+①在首页产品中找到域名注册
+
+<img src="https://i.loli.net/2020/04/07/X6BK2cCOsEG1Akz.png"/>
+
+域名注册得先查看是否可以注册：
+
+<img src="https://i.loli.net/2020/04/07/YvZEpMunGtc2kxS.png"/>
+
+选择需要的域名：
+
+<img src="https://i.loli.net/2020/04/07/Jnxsw5h2maqDMlg.png"/>
+
+确认购买信息：
+
+<img src="https://i.loli.net/2020/04/07/bfWOU85rTKctp7E.png"/>
+
+购买之后就可以在后台控制面板中去查看域名情况。
+
+### 3、域名备案
+
+备案：当申请域名的人要想在国内使用域名，则需要向当地的通信管理局（省级）去申请报备。
+备案前提：想要使用境内服务器的话，则必须得备案。
+在管理后台点击“ICP备案系统”
+
+<img src="https://i.loli.net/2020/04/07/iDWknwQs6FpgU1T.png" style="zoom:67%;" />
+
+点击新增主体备案：
+
+<img src="https://i.loli.net/2020/04/07/JgOFnxj7YCIM1Hk.png"/>
+
+填写完基本信息之后点击增加网站：
+
+<img src="https://i.loli.net/2020/04/07/3ZfhGvxUmRX7EdV.png" style="zoom:67%;" />
+
+备案服务号可以在控制台顶部去获取：
+
+<img src="https://i.loli.net/2020/04/07/f2kiLSzM9HY3mxq.png"/>
+
+申请到备案服务号之后填写继续：
+
+<img src="https://i.loli.net/2020/04/07/Hoy3Eb769k14VIG.png" style="zoom:67%;" />
+
+会让用户下载一个图片：网站真实性核验单下载打印，填写好上传到阿里云备案系统中。
+后面等待初审，初审通过之后继续下一步（初审时间一般1天即可）
+
+拍照（备案幕布）
+
+上传照片
+
+等待管局审核（到这个步骤基本是已经通过，审核周期一般是15个工作日）。
+
+等待审核通过，就会收到工信部发送的短信与邮件通知，邮件中有备案号和备案密码。
+
+### 4、域名解析
+
+点击“解析”
+
+<img src="https://i.loli.net/2020/04/07/vdLEVKNn7DtXeoZ.png"/>
+
+解析：将域名绑定到一个服务器地址的操作
+
+DNS:domain name server，用于将域名转化成ip地址的服务器。
+
+<img src="https://i.loli.net/2020/04/07/YVU3RDFQo298WxB.png" style="zoom:67%;" />
+
+点击右上角的添加记录：
+
+<img src="https://i.loli.net/2020/04/07/uNx46HCUDJTP5zL.png" style="zoom:67%;" />
+
+选择记录
+
+<img src="https://i.loli.net/2020/04/07/Hcr2CoRMdgYsPAl.png" style="zoom:67%;" />
+
+例如：需要将www.linux123.xyz解析到之前购买的云主机上，则解析可以设置如下：
+
+<img src="https://i.loli.net/2020/04/07/s5fdaFt8HpQXmr9.png" style="zoom:67%;" />
+
+解析之后可以通过在线ping命令检测效果：
+
+<img src="https://i.loli.net/2020/04/07/EcZTdNX3rOQyPJx.png" style="zoom:67%;" />
+
+### 5、配置生产环境（最后1天）
+
+### 6、上传代码
+
+此时需要使用上传工具：pscp，filezilla。
+
+# 十一. Shell基础
+
+## 一、关于shell
+
+### 1、什么是shell？
+
+Shell（外壳）是一个用c语言编写程序，它是用户使用Linux的桥梁。Shell既是一种命令语言，又是一种程序设计语言。
+Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。什么是脚本？
+脚本简单地说就是一条条的文字命令，这些文字命令是可以看到的（如可以用记事本打开查看、编辑）。
+常见的脚本：JavaScript（JS,前端），VBScript，ASP，JSP，PHP（后端），SQL(数据库操作语言)，Perl，Shell，python，Ruby，JavaFX，Lua等。
+为什么要学习和使用shell？
+
+Shell 属于内置的脚本
+
+程序开发的效率非常高，依赖于功能强大的命令可以迅速地完成开发任务(批处理)
+
+常见的shell种类？
+在linux中有很多类型的shell，不同的shell具备不同的功能，shell还决定了脚本中函数的语法，Linux中默认的shell是**/bin/bash**（重点），流行的shell有ash、bash、ksh、csh、zsh等，不同的shell都有自己的特点以及用途。
+csh cshell 使用的是“类C”语法csh是具有c语言风格的一种shell，其内部命令有52个，较为庞大。目前使用的并不多，已经被/bin/tcsh所取代。
+ksh Korn shell的语法与Bourne shell相同，同时具备了Cshell的易用特点。许多安装脚本都使用ksh，ksh有42条内部命令，与bash相比有一定的限制性。
+tcsh tcsh是csh的增强版，与Cshell 完全兼容。
+
+sh是一个快捷方式，已经被/bin/bash所取代。
+nologin指用户不能登录
+
+<img src="https://i.loli.net/2020/04/07/vMSVXG1f3kTwqZg.png" style="zoom: 67%;" />
+
+zsh目前Linux 最庞大的一种shell:zsh。它有84个内部命令，使用起来也比较复杂。一般情况下，不会使用该shell。
+bash大多数Linux系统默认使用的shell，bash shell 是Bourne shell的一个免费版本，它是最早的Unixshell，bash还有一个特点，可以通过help命令来查看帮助。包含的功能几乎可以涵盖shell所具有的功能，所以一般的shel脚本都会指定它为执行路径。
+
+### 2、shell入门
+
+编写规范：
+
+```
+代码规范：
+#!bin/bash     [指定告知系统当前这个脚本要使用的 shell解释器]
+Shell 相关指令
+文件命名规范：
+文件名.sh           sh是linux下bash shell的默认后缀
+```
+
+使用流程：
+
+```
+①创建.sh文件  touch/vim
+②编写shell代码
+③执行shell脚本      脚本必须得有执行权限
+```
+
+案例1：创建 test.sh，实现第一个shell脚本程序，输出hello world.
+输出命令：`#echo 123`
+
+注意：输出的内容如果包含字母和符号（不包含变量），则需要用引号包括起来。如果是纯数字可以包也可以不包。
+
+<img src="https://i.loli.net/2020/04/07/REwFM1PWjXvBUDm.png" style="zoom:67%;" />
+
+<img src="https://i.loli.net/2020/04/07/QNFX2ELdDIGToeY.png" style="zoom:67%;" />
+
+<img src="https://i.loli.net/2020/04/07/n63DAP9jItmTfFc.png" style="zoom:67%;" />
+
+注意，这里在运行时一定要写成`/test.sh`，而不是test.sh，运行其它二进制的程序也一样，直接写 test.sh，Linux系统会去PATH（环境变量）里寻找有没有叫test.sh的，而只有
+/bin，/sbin，/usr/bin，/usr/sbin 等在PATH里，你的当前目录通常不在PATH里，所以写成test.sh 是会找不到命令的，要用/test.sh 告诉系统说，就在当前目录找。
+
+案例2：使用root 用户账号创建并执行test2.sh，实现创建一个shelltest用户，并在其家目录中新建文件try.html。
+
+<img src="https://i.loli.net/2020/04/07/qauV5wyKMP9CO23.png" style="zoom:67%;" />
+
+<img src="https://i.loli.net/2020/04/07/tY34odLvjbSVcEJ.png" style="zoom:67%;" />
+
+脚本执行的另外一个方式：`/bin/bash 脚本的路径`（了解）
+
+Shell 脚本分为简单的写法（简单命令的堆积）和复杂写法（程序的设计）
+
+## 二、shell进阶（重点）
+
+### 1、变量
+
+#### 1.1、变量的含义
+
+##### a.什么是量
+
+量就是数据.
+
+##### b.什么是变量
+
+数据可以发生改变就是变量。
+在一个脚本周期内，其值可以发生改变的量就是变量
+
+##### c.什么叫做一个脚本周期
+
+一个脚本周期我们可以简单的理解为当前的shell文件变量是shell中不可或缺的一部分，也是最基础、最重要的组成部分。
+
+#### 1.2、变量的定义与使用
+
+变量，先定义后使用
+
+定义形如：`class name="yunwei"`
+使用形如：`echo $class name`
+
+变量就是由2部分组成，一个是变量名（左边），另外一部分是变量的值（右边）变量名和变量值是什么关系？？
+变量名和变量值是使用和被使用关系；我们的变量名来使用变量值；
+
+在使用变量的时候一定需要在变量名前面添加一个s符号，该要求在其他语言中也存在的(例如php)。
+
+变量名的规范
+注意，变量名后面的等号左右==不能有空格==，这可能和你熟悉的所有编程语言都不一样。同时，变量名的命名须遵循如下规则：
+命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。
+中间不能有空格，可以使用下划线“_”。
+不能使用标点符号。
+不能使用bash里的关键字（可用help命令查看保留关键字）。
+
+<img src="https://i.loli.net/2020/04/07/EvTz9MKCPoc78J6.png"/>
+
+案例1：使用变量改写入门脚本中的第1个shell脚本。
+
+<img src="https://i.loli.net/2020/04/07/CXvGu3TL1aOH8NP.png" style="zoom:67%;" />
+
+```
+关于单双引号的问题：
+	双引号能够识别变量,双引号能够转义（类似于“\*”）
+	单引号是不能识别变量，只会原样输出,单引号是不能转义的
+```
+
+案例2：定义一个变量，输出当前时间，要求格式为“年-月-日时：分：秒”。
+
+<img src="https://i.loli.net/2020/04/07/Cok6eWXYMytEuDh.png" style="zoom:67%;" />
+
+注意：反引号（esc键下方的那个键），当在脚本中需要执行一些指令并且将执行的结果赋给变量的时候需要使用“反引号”。
+
+<img src="https://i.loli.net/2020/04/07/QqcMAf3zphDO1Ya.png" style="zoom:67%;" />
+
+#### 1.3、只读变量（了解）
+
+语法：readonly 变量名
+
+案例：定义变量a并且其值为10，随后设置其为只读变量，再去尝试重新赋值
+
+<img src="https://i.loli.net/2020/04/07/dR9tpPTcaIA3uWx.png" style="zoom:67%;" />
+
+<img src="https://i.loli.net/2020/04/07/XeDdCVoJYKQjfnO.png" style="zoom:67%;" />
+
+#### 1.4、接收用户输入
+
+语法：`read -p 提示信息 变量名`
+
+案例：编写一个脚本test6.sh，要求执行之后提示用户输入文件的名称（路径），然后自动为用户创建该文件
+
+<img src="https://i.loli.net/2020/04/07/FU1NoS6nEOZKCmz.png" style="zoom:67%;" />
+
+<img src="https://i.loli.net/2020/04/07/4yRk6ZmGPdh1HYU.png" style="zoom:67%;" />
+
+#### 1.5、删除变量（了解）
+
+语法：`unset 变量名`
+案例：定义变量b=20，再输出b的值，随后删除b，最后再输出下b
+
+<img src="https://i.loli.net/2020/04/07/R8G6EKTXP1F2QxH.png" style="zoom:67%;" />
+
+<img src="https://i.loli.net/2020/04/07/WAV6d5TB984mayg.png" style="zoom:67%;" />
+
+### 2、条件判断语句
+
+老婆给当程序员的老公打电话：下班顺路买一斤包子带回来，如果看到卖西瓜的，买一个。当晚，程序员老公手捧一个包子进了家门…老婆怒道：你怎么就买了一个包子？！老公答曰：因为看到了卖西瓜的。
+
+把程序员老婆的话当作一段需分析一下吧。买一斤包子是一个确定无疑的需求项，无论后面是什么情况什么条件，前面这一斤包子是肯定要买的。看到卖西瓜的是一个条件判断，后面“买一个”是一个模糊不清的需求项，买一个什么呢？需求里没说啊。客户把这个当作开发人员默认了解的内容了。可是作为一个成熟合格的程序员，该老婆的丈夫应该马上跟进确认需求“买一个什么？”，要不然程序可怎么写呢？所以笑话里该程序员是不合格的，起码是不积极不负责的。在没有明确需求的情况下，他只能按照自己的理解来完成工作了。那比较可能的结果就有如下几种：
+1看到卖西瓜的，买一个西瓜
+
+​	如果 看到卖西瓜的
+​		那么
+​		买一个西瓜
+
+2看到卖西瓜的，买一个包子
+
+​	如果 看到卖西瓜的
+​		那么
+​		买一个包子
+
+3看到卖西瓜的，买一个卖西瓜的
+
+4看到卖西瓜的，买一个老婆一直想买的东西
+
+5看到卖西瓜的，随便买一个东西
+
+上述1和2下面的条件汉字描述称之为“伪代码”，也是属于条件表达式的语法。
+
+#### 语法1：
+
+if condition 
+
+then 
+
+​	command1
+
+​	command2
+
+​	……
+
+fi
+
+单行写法：（一般在命令行中执行的时候）
+
+if[condition];then command;fi
+
+#### 语法2：
+
+if condition
+
+then 
+
+​	command1
+
+​	command2
+
+​	……
+
+else
+	command
+
+fi
+
+#### 语法3：
+
+if condition1
+then
+	command1
+elif condition2
+then
+	command2
+else 
+	commandN
+fi
+
+### 3、运算符
+
+在shell中，运算符和其他编程脚本语言一样，常见的有算数运算符、关系运算符、逻辑运算符、字符串运算符、**文件测试运算符**等
+
+#### 3.1、算数运算符
+
+下表列出了常用的算术运算符，假定变量a为10，变量b为20：
+
+<img src="https://i.loli.net/2020/04/07/nGBsUDyAC41fTYc.png" style="zoom: 67%;" />
+
+注意：条件表达式要放在方括号之间，并且要有空格，例如：`[$a==$b]`是错误的，必须写成`[ $a == $b ]`。
+
+```
+原生bash 不支持简单的数学运算，但是可以通过其他命令来实现，例如awk和expr，expr最常用。
+expr 是一款表达式计算工具，使用它能完成表达式的求值操作。
+例如，两个数相加（注意使用的是反引号而不是单引号）：
+#！/bin/bash
+val=`expr 2 + 2`
+echo“两数之和为：$val"
+两点注意：
+表达式和运算符之间要有空格，例如2+2是不对的，必须写成2+2，这与我们熟悉的大多数编程语言不一样。
+完整的表达式要被包含，注意这个字符不是常用的单引号，在Esc键下边。
+```
+
+<img src="upload%5Cimage-20200407234328917.png" alt="image-20200407234328917" style="zoom: 50%;" />
+
+<img src="https://i.loli.net/2020/04/07/tz2Cc5oqxkAvi7I.png" style="zoom: 67%;" />
+
+#### 3.2、关系运算符
+
+​	关系运算符只支持数字，不支持字符串，除非字符串的值是数字。下表列出了常用的关系运算符，假定变量a为10，变量b为20：
+
+<img src="https://i.loli.net/2020/04/07/pqiLSZmWa1HOcxw.png" style="zoom:67%;" />
+
+```
+-eq:equal
+-neq:not equal
+-t:great thanI
+-lt:less than
+-ge:great than or equal
+-le:less than or equal
+```
+
+<img src="https://i.loli.net/2020/04/07/3cT5ayrIOuLjHWS.png" style="zoom:67%;" />
+
+<img src="https://i.loli.net/2020/04/07/Bja7Igqw69VJQxP.png" style="zoom:67%;" />
+
+课堂作业：
+写一个脚本，判断当前输入的用户是否存在。如果存在则提示“用户存在”否则提示“用户不存在”。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
