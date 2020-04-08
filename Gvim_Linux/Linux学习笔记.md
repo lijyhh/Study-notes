@@ -1,4 +1,4 @@
-<img src="https://i.loli.net/2020/04/08/hAwGRJnX1ITzYEU.png"/>[<img src="https://i.loli.net/2020/04/08/hAwGRJnX1ITzYEU.png"/>Linux命令大全](https://man.linuxde.net/)
+[Linux命令大全](https://man.linuxde.net/)
 
 # 一．Linux基础知识
 
