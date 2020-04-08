@@ -326,7 +326,7 @@ bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp
 
 补充：在Linux中重命名的命令也是mv，语法和移动语法一样。但是路径得不变。
 
-![mv2](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200405101439.png)
+<img src="https://i.loli.net/2020/04/08/K7LZITNamsCvrbE.png"/>
 
 #### 8、rm命令
 
@@ -368,7 +368,7 @@ bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp
 
 打开后界面：
 
-![vim](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200405102734.png)
+<img src="https://i.loli.net/2020/04/08/i7AwyEfnSzxhG2F.png"/>
 
 #### 10、输出重定向
 
