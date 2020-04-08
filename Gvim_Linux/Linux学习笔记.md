@@ -1,4 +1,4 @@
-[Linux命令大全](https://man.linuxde.net/)
+Linux命令大全](https://man.linuxde.net/)
 
 # 一．Linux基础知识
 
@@ -52,7 +52,7 @@
 
   所谓终端，其实类似于windows下cmd命令行模式。在终端中可以输入需要执行的一些指令，同样可以通过终端进行关机（注意：以后在工作中很少会去使用关机命令，会使用重启）。
 
-![img](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/终端介绍.png)
+<img src="https://i.loli.net/2020/04/08/H68vqfwyoOZnIt5.png" style="zoom:50%;" />
 
 - 如何使用终端命令进行关机？
 
@@ -82,7 +82,7 @@
 
 - 克隆时注意：
 
-![img](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/20200404235517.png)
+<img src="https://i.loli.net/2020/04/08/O16LdHuMGIhjaDn.png" style="zoom:50%;" />
 
 - 克隆好的服务器相关密码帐号等信息与被克隆的系统一致。
 
@@ -118,7 +118,7 @@
 
 ### 2.2目录结构：
 
-![文件结构](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/文件结构.png)
+<img src="https://i.loli.net/2020/04/08/4z9vpeD5Im8d1Lc.png"/>
 
 Bin：全称binary，含义是二进制。该目录中存储的都是一些二进制文件，文件都是可以被运行的。
 
@@ -184,7 +184,7 @@ bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp
 
 含义：ls（list）
 
-![根目录](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/20200405003610.png)
+<img src="https://i.loli.net/2020/04/08/KoWbEytanrdDiwS.png" style="zoom:50%;" />
 
 /表示盘的根目录 
 
@@ -192,13 +192,13 @@ bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp
 
 - 含义：列出当前工作目录下的所有文件/文件夹的名称
 
-![ls1](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/ls_1.png)
+<img src="https://i.loli.net/2020/04/08/Hm2BjbJuLGP3lYC.png" style="zoom:50%;" />
 
 用法2：`#ls  路径`
 
 - 含义：列出指定路径下的所有文件/文件夹的名称
 
-![ls2](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/ls2.png)
+<img src="https://i.loli.net/2020/04/08/IClfUo4NwKkiPFz.png" style="zoom:50%;" />
 
 ==关于路径（重要）：==
 
@@ -224,13 +224,13 @@ bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp
 
   1. -1：表示list，表示以详细列表的形式进行展示
 
-     ![ls3](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/ls3.png)
+     <img src="https://i.loli.net/2020/04/08/xczFULYrMJK7QCT.png"/>
 
      - 上述列表中的第一列字符表示文档的类型，其中“-”表示该行对应的文档类型为文件，“d”表示文档类型为文件夹。
 
   2. -a：表示显示所有的文件/文件夹（包含了隐藏文件/文件夹）
 
-     ![ls4](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/20200405005921.png)
+     <img src="https://i.loli.net/2020/04/08/RJ2gNCzHpaIOjEP.png"/>
 
      - 在Linux中隐藏文档一般都是以“.”开头。 
 
@@ -238,7 +238,7 @@ bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp
 
 - 含义：列出指定路径下的所有文件/文件夹的名称，以列表的形式并且在显示文档大小的时候以可读性较高的形式显示
 
-![ls4](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/20200405075251.png)
+<img src="https://i.loli.net/2020/04/08/u9znkDrmOdlVeN7.png" style="zoom:50%;" />
 
 - 注意：ls列出的结果颜色说明，其中蓝色的名称表示文件夹，黑色的表示文件，绿色的表示其权限为拥有所有权限。
 
@@ -246,7 +246,7 @@ bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp
 
 用法：`#pwd`（print working directory，打印当前工作目录）
 
-![pwd](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/20200405075557.png)
+<img src="https://i.loli.net/2020/04/08/bUSyRzTw7VkIfEJ.png" style="zoom: 50%;" />
 
 #### 3、cd命令
 
@@ -262,7 +262,7 @@ bin为binary的简写主要放置一些 系统 的必备执行档例如:cat、cp
 
 切换方式：`#cd ～`
 
-![cd](https://raw.githubusercontent.com/lijyhh/My_typora_pics/master/img/20200405075845.png)
+<img src="https://i.loli.net/2020/04/08/rbHh1oKjl54gzFO.png" style="zoom:50%;" />
 
 #### 4、mkdir指令
 
