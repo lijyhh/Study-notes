@@ -1,2 +1,2 @@
 # Study-notes
-Some study notes in learning process.     
+Some study notes in learning process. 
