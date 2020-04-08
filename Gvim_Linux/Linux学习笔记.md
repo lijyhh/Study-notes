@@ -2931,7 +2931,7 @@ echo“两数之和为：$val"
 完整的表达式要被包含，注意这个字符不是常用的单引号，在Esc键下边。
 ```
 
-<img src="upload%5Cimage-20200407234328917.png" alt="image-20200407234328917" style="zoom: 50%;" />
+<img src="https://i.loli.net/2020/04/07/xvG6NlkgFtej3hZ.png" style="zoom:67%;" />
 
 <img src="https://i.loli.net/2020/04/07/tz2Cc5oqxkAvi7I.png" style="zoom: 67%;" />
 
@@ -2944,7 +2944,7 @@ echo“两数之和为：$val"
 ```
 -eq:equal
 -neq:not equal
--t:great thanI
+-gt:great than
 -lt:less than
 -ge:great than or equal
 -le:less than or equal
@@ -2957,41 +2957,53 @@ echo“两数之和为：$val"
 课堂作业：
 写一个脚本，判断当前输入的用户是否存在。如果存在则提示“用户存在”否则提示“用户不存在”。
 
+#### 3.3、逻辑运算符
 
+下表列出了常用的布尔运算符，假定变量a为10，变量b为20：
 
+<img src="https://i.loli.net/2020/04/08/zIMOKF6SsN41Zuk.png"/>
 
+或运算：一个为真即为真，全部为假就是假
 
+与运算：一个为假即为假，全部为真才是真
 
+<img src="https://i.loli.net/2020/04/08/Nn6BqlThCY3J2PK.png" style="zoom: 50%;" />
 
+#### 3.4、字符串运算符
 
+下表列出了常用的字符串运算符，假定变量a为“abc"，变量b为“efg”：
 
+<img src="https://i.loli.net/2020/04/08/zWnLRJwu1VaGNv7.png" style="zoom:50%;" />
 
+<img src="upload%5Cimage-20200408185659173.png" alt="image-20200408185659173" style="zoom:50%;" />
 
+#### 3.5、文件测试运算符（重点）
 
+文件测试运算符用于检测Unix/Linux文件的各种属性。
+属性检测描述如下：
 
+<img src="https://i.loli.net/2020/04/08/5vX9E3ioOJGVPIs.png" style="zoom: 50%;" />
 
+<img src="https://i.loli.net/2020/04/08/1NvQLfXpUTYunqx.png" style="zoom:50%;" />
 
+<img src="https://i.loli.net/2020/04/08/wsYtSTgBRWrQod1.png" style="zoom:50%;" />
 
+<img src="https://i.loli.net/2020/04/08/FOoGWzUPYlAekQH.png" style="zoom: 50%;" />
 
+注意：权限几个判断，如果只有一个部分符合，则认为是有权限的。
 
+### 4、shell 脚本附带选项（重点）
 
+问题描述：在linux shell 中如何处理tail -10 access.log这样的命令行选项？
 
+步骤：
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+调用tail指令
+系统内核把后续选项传递给 tail
+Tail先去打开指定的文件
+取出最后10行
+```
 
 
 
