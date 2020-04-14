@@ -1,4 +1,6 @@
-Linux命令大全](https://man.linuxde.net/)
+[Linux命令大全](https://man.linuxde.net/)
+
+[CentOS6.5](https://www.bilibili.com/video/BV1xJ411n7hZ)
 
 # 一．Linux基础知识
 
@@ -2557,8 +2559,6 @@ IP：使用的协议类型
 
 <img src="https://i.loli.net/2020/04/07/f78HlhUy9uLCpkn.png" style="zoom: 33%;" />
 
-<img src="upload%5Cimage-20200407193942555.png" alt="image-20200407193942555" style="zoom: 60%;" />
-
 ②选择具体的配置
 
 <img src="https://i.loli.net/2020/04/07/SLngBQeOAxMVcIF.png"/>
@@ -3095,8 +3095,7 @@ tar -zxvf ncurses-6.1.tar.gz
 
 ③切换到源码文件夹，然后执行后续操作
 
-配置（config/configure/bootstrap）→编译（make/bootstrapd）→安装（make
-install/bootstrapd install）
+配置（config/configure/bootstrap）→编译（make/bootstrapd）→安装（make install/bootstrapd install）
 
 配置操作主要是指定软件的安装目录、需要的依赖在什么地方、指定不需要可选依赖、配置文件的路径、通用数据存储位置等等。
 
@@ -3140,7 +3139,7 @@ install/bootstrapd install）
 
 案例：使用二进制包安装lynx（一款纯命令行的浏览器）
 
-<img src="https://i.loli.net/2020/04/08/d42HVM5SxXvJCGy.png"/>
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414212657.png"/>
 
 例如查看百度：#lynx --dump www.baidu.com
 
@@ -3168,27 +3167,336 @@ c.yum等傻瓜式安装
 案例：使用yum指令安装火狐浏览器
 #yum install firefox
 
+### 2、安装MySQL（重点）
 
+注：此处安装以yum安装为例
 
+#### 2.1、MysQL安装
 
+```
+#yum install mysql-server
+```
 
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200411201458.png" style="zoom:50%;" />
 
+安装完成
 
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200411201543.png" style="zoom:50%;" />
 
+#### 2.2、MysQL初始化
 
+```
+#service mysqld start
+```
 
+<img src="https://i.loli.net/2020/04/11/qAh9iHp8UDbOdM6.png" style="zoom: 50%;" />
 
+查看端口号（默认端口号）：
 
+<img src="https://i.loli.net/2020/04/11/oZMvYCXOqtfiD2z.png"/>
 
+ #mysql secure installation
 
+```
+Enter current password for root（enter for none）：请输入当前 root用户的密码，如果没有按回车，注意此root 并非linux的root用户。
 
+Set root password？是否设置root密码？
+需要设置的密码：********
 
+Remove anonymous users？是否移除匿名用户，选择移除（Y）
 
+Disallow root login remotely？是百允许root 远程登录（默认不允许）
 
+Remove test database and access to it？是否移除测试数据库（建议先不移除）
 
+Reload privilege tables now？是否重新加载权限表（当我们更改了mysql用户相关的信息之后建议去重载权限）
+```
 
+<img src="https://i.loli.net/2020/04/11/ig3Lq7EjYWHAJwb.png" style="zoom:50%;" />
 
+#### 2.3、MysQL的启动控制
 
+语法：service mysgld start/stop/restart
+
+进入mysql的方式：
+#mysql -u用户名 -p
+
+退出MysQL到linux命令行：
+mxsql>exit
+
+#### 2.4、默认目录/文件位置（了解）
+
+数据库存储目录：/var/lib/mysql
+配置文件：/etc/my.**cnf**
+
+<img src="https://i.loli.net/2020/04/11/gtU7AH5hxJyZdYF.png" style="zoom: 67%;" />
+
+## 三、MysQL的基本操作（难点）
+
+### 1、名词介绍
+
+以Excel文件举例：
+
+```
+数据库：可以看作是整个excel文件。
+数据表：可以看作是一个excel文件中的工作表。
+行（记录）：可以看作是一个工作表中的一行
+列（字段）：可以看作是一个工作表总的一列
+```
+
+### 2、库操作
+
+以下命令在MySQL终端命令行中执行：
+
+```
+SHOW DATABASES；              显示当前MySQL中全部的数据库
+CREATE DATABASE库名；         创建数据库
+DROP DATABASE库名；					删除数据库
+USE库名；									 切换数据库
+```
+
+Show databases 效果：
+
+<img src="https://i.loli.net/2020/04/11/fVGCUDSthQ1Ez7m.png" style="zoom:50%;" />
+
+创建数据库：创建 yunwei数据库
+
+<img src="https://i.loli.net/2020/04/11/XDq1Pbu3gGkWjmy.png" style="zoom:50%;" />
+
+删除数据库：删除 yunwei数据库
+
+<img src="https://i.loli.net/2020/04/11/1lSdwbFGMfZR2ND.png" style="zoom:50%;" />
+
+切换数据库：切换到test 数据库
+
+<img src="https://i.loli.net/2020/04/11/SP1a5uTKH6wBfGb.png" style="zoom:50%;" />
+
+### 3、表操作
+
+```
+SHOW TABLES；				显示当前数据库中所有的表名（必须先use数据库）
+
+CREATE TABLE表名称     在当前数据库下创建数据表
+(
+列名称1数据类型[NOT NULL AUTO_INCREMENT]，
+列名称2数据类型，
+列名称3数据类型，
+......,
+PRIMARY KEY（主键字段名）
+）；
+常见的数据类型：int（整型）、char（定长字符）、varchar（不定长字符）
+主键一般就是序号所在的那一列（主键不能重复）
+
+DESC表名；     描述一个数据表（查看表结构）
+DROP TABLE[IF EXISTS]表名；			删除一个数据表
+```
+
+案例：使用上述的语法
+查看所有的数据表
+
+<img src="https://i.loli.net/2020/04/11/OdirbZPYpRGcqkK.png" style="zoom:50%;" />
+
+创建数据表（去test库中创建）
+
+要求：表名xg，要求有字段如下：
+ld字段，11位整型，不为空，自增，主键
+
+Username字段，varchar类型，20长度
+
+Password字段，char 类型，32长度
+
+SQL（standard query language）语句：
+
+```
+Create table xg( 
+Id int（11）not null auto_increment，
+Username varchar（20），
+Password char（32），
+Primary key(id)
+)
+```
+
+<img src="https://i.loli.net/2020/04/11/CShqn3RXZidBxoe.png" style="zoom:50%;" />
+
+查看表结构：
+
+<img src="https://i.loli.net/2020/04/11/YVkF2ZleqPNCtjb.png" style="zoom:50%;" />
+
+删除数据表：
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414002851.png" style="zoom: 33%;" />
+
+### 4、记录/字段操作（重点）
+
+#### 4.1、增加记录
+
+```
+语法1：INSERT INTO 表名称 VALUES（值1，值2，.…）；
+
+语法2：INSERT INTO 表名称（列1，列2.…）VALUES（值1，值2，.…）；
+```
+
+案例：往数据表xg表中新增一个记录username为zhangsan，password为123456（加密结果E10ADC3949BA59ABBE56E057F20F883E）
+
+Sql语句：
+insert into xg（username，password）values（‘zhangsan’，‘E10ADC3949BA59ABBE56EO57F20F883E’）
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413231317.png"/>
+
+要求前面的列名与值要一一对应。
+
+#### 4.2、更新记录
+
+```
+语法：UPDATE 表名称 SET 列名称1=新值1，列名称2=新值2...WHERE 列名称=某值；
+```
+
+案例：使用更新语句更新id大于等于2的记录，将其密码改为：
+25F9E794323B453885F5181F1B624D0B
+
+SQL语句：
+Update xg set password =‘25F9E794323B453885F5181F1B624DOB'where id>=2；
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413232525.png"/>
+
+以后在执行影响行数的sql操作的时候一定需要注意条件是否写错或者漏写。
+
+#### 4.3、查询记录
+
+```
+SELECT 列名称1，列名称2... FROM 表名称 WHERE 条件；
+SELECT * FROM 表名称 WHERE 条件；
+```
+
+案例：查询刚才新增的记录
+只查询用户名和密码，并且是id=2的：
+Select username，password from xg where id=2；
+
+<img src="https://i.loli.net/2020/04/13/rlFhicaePbuyfHD.png" style="zoom:50%;" />
+
+查询全部：
+Select * from ×g；
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413232118.png" style="zoom: 33%;" />
+
+#### 4.4、删除记录
+
+```
+DELETE FROM 表名称 WHERE 列名称=值；
+```
+
+案例：删除id为2的记录
+Delete from xg where id=2；
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413232936.png" style="zoom:50%;" />
+
+### 5、备份与还原（重点）
+
+#### 5.1、备份（导出）
+
+全量备份（数据+结构）：
+
+```
+全量备份（数据+结构）：#mysqldump -uroot -p123456(密码) -A > 备份文件路径
+指定库备份（数据+结构）：#mysqldume -uroot -p123456 库名 > 备份文件路径
+多个库备份（数据+结构）：#mysqldump -uroot -p123456 --databases db1 db2 > 备份文件路径
+```
+
+xxxx.sql    xxx.tar.gz
+
+案例：备份整个库
+#mysqldump -uroot -pqhabOfhlluB9 -A > /root/sql_201804061609.sql
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413234053.png" style="zoom:50%;" />
+
+案例：每1分钟自动备份1次test数据库
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413234455.png" style="zoom: 50%;" />
+
+计划任务编写：
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413234617.png" style="zoom:50%;" />
+
+等待几分钟观察目录情况：
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413234856.png" style="zoom:50%;" />
+
+#### 5.2、还原（导入）
+
+还原部分分（1）mysql命令行source方法 和 （2）系统命令行方法
+1.还原全部数据库：
+（1）mysql命令行：`mysql>source 备份文件路径`
+（2）系统命令行：mysql -uroot -p123456 <(输入重定向) 备份文件路径
+2.还原单个数据库**（需指定数据库）**
+（1）mysql>use 库名
+	mysql>source备份文件路径
+（2）mysql -uroot -p123456 库名 < 备份文件路径
+3.还原单个数据库的多个表（需指定数据库）
+
+（1）mysql>use库名
+	mysql>source 备份文件路径
+（2）mysql -uroot -p123456 库名 < 备份文件路径
+
+4.还原多个数据库，（一个备份文件里有多个数据库的备份，此时不需要指定数据库）
+（1）mysql命令行：mysql>source备份文件路径（2）系统命令行：mysql -uroot -p123456 < 备份文件路径
+
+案例：人为删除xg表（模拟数据表丢失），然后通过最后一次备份还原数据表。
+
+先删除数据表
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413235702.png" style="zoom:50%;" />
+
+还原操作：
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200413235916.png" style="zoom:50%;" />
+
+案例2：需要还原sqL文件到test库库（mobile.sql31万条数据）
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414000330.png" style="zoom:50%;" />
+
+设置Mysql连接字符集：
+`Mysql> set names utf8；`
+
+【三码一致，服务器端+传输过程中+客户端】
+
+## 四、扩展
+
+### 1、mysql的远程管理工具
+
+分为两大类：B/s架构、C/s架构。
+B/S:B是指浏览器，s是指服务器。例如：百度搜索应用就属于BS架构软件。
+C/s:C是指客户端，s是指服务器。例如：QQ、电脑端徽值等应用程序都是CS架构。
+
+在Bs中，mysql有个典型的管理工具：PMA（phpMyAdmin）
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414001124.png" style="zoom:33%;" />
+
+cs中比较典型的软件：**navicat**、mysql workbrach
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414001506.png" style="zoom:67%;" />
+
+要解决的问题：允许mysql远程登录
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414001544.png" style="zoom:50%;" />
+
+a.先进入数据库选择mysql数据库；
+
+b.执行sgql语句：select host,user from user；
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414001700.png" style="zoom:50%;" />
+
+c.将其中的一个记录的host值改为“%”，表示可以允许任何地方登录
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414001947.png" style="zoom:50%;" />
+
+d.刷新权限表或者重启mysql
+
+刷新权限：mysql> flush privileges；
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414002106.png" style="zoom:50%;" />
+
+e.navicat登录成功
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414002132.png" style="zoom:50%;" />
 
 
 
