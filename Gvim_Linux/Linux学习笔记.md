@@ -1176,17 +1176,37 @@ Vim的打开文件的方式（4种，要求掌握的就前三种）：
   #：表示上一个打开的文件
   ```
 
-  - 切换文件的方式：
-    a.如果需要指定切换文件的名称，则可以输入：“：open 已经打开的文件名”
+  - 
+    
+- - 切换文件的方式：
+      a.如果需要指定切换文件的名称，则可以输入：“：open 已经打开的文件名”
 
-    b.可以通过其他命令来切换上一个文件/下一个文件
-
-    ```
-    输入：“：bn”切换到下一个文件（back next）
-    输入：“：be”切换到上一个文件（back prev）
-    ```
-
-## 六. 编辑模式
+      b.可以通过其他命令来切换上一个文件/下一个文件
+  
+      ```
+      输入：“：bn”切换到下一个文件（back next）
+      输入：“：be”切换到上一个文件（back prev）
+      1、横向分屏打开另一个文件
+      :vs 文件
+      2、纵向分屏打开另一个文件
+      :sp 文件
+      ```
+  
+  - 如果在终端还没有打开vim
+  
+  1、vim横向分屏打开多个文件
+  
+  ```
+  vim -o 文件1 文件2
+  ```
+  
+  2、vim纵向分屏打开多个文件
+  
+  ```
+  vim -O 文件1 文件2
+  ```
+  
+  ## 六. 编辑模式
 
 ![编辑模式](https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200405151742.png)
 
@@ -3497,6 +3517,56 @@ d.刷新权限表或者重启mysql
 e.navicat登录成功
 
 <img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414002132.png" style="zoom:50%;" />
+
+
+
+# 十三. Ubuntu命令
+
+## 1.apt
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200430173411.png"/>
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200430183834.png"/>
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200430201444.png"/>
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200430202106.png"/>
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200430204137.png"/>
+
+
+
+<img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200430205102.png"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

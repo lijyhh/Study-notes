@@ -5,7 +5,7 @@ Some study notes in learning process.
 
 # Download
 
-If you want to download a signal file, please copy the path of this file in github and paste into this website:[DownGit](https://www.itsvse.com/downgit/#/home?url=)
+If you want to download a singal file, please copy the path of this file in github and paste into this website:[DownGit](https://www.itsvse.com/downgit/#/home?url=)
 
 Steps:
 
