@@ -5,9 +5,9 @@
   git add .
   git commit -m $1
   git push -u origin master
-  echo '\n'
+  echo ' ' 
   echo 'Study notes has finished.'
-  echo '\n'
+  echo ' '
   
   cp ./Gvim_Linux/Linux学习笔记.md /c/Users/lijy花花/Desktop/Linux/LinuxCentos
   cd /c/Users/lijy花花/Desktop/Linux/LinuxCentos
