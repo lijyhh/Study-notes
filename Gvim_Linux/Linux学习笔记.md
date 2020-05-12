@@ -1177,7 +1177,7 @@ Vim的打开文件的方式（4种，要求掌握的就前三种）：
   ```
 
   - 
-    
+  
 - - 切换文件的方式：
       a.如果需要指定切换文件的名称，则可以输入：“：open 已经打开的文件名”
 
@@ -2755,8 +2755,8 @@ Shell 相关指令
 
 <img src="https://i.loli.net/2020/04/07/n63DAP9jItmTfFc.png" style="zoom:67%;" />
 
-注意，这里在运行时一定要写成`/test.sh`，而不是test.sh，运行其它二进制的程序也一样，直接写 test.sh，Linux系统会去PATH（环境变量）里寻找有没有叫test.sh的，而只有
-/bin，/sbin，/usr/bin，/usr/sbin 等在PATH里，你的当前目录通常不在PATH里，所以写成test.sh 是会找不到命令的，要用/test.sh 告诉系统说，就在当前目录找。
+注意，这里在运行时一定要写成。`./test.sh`，而不是test.sh，运行其它二进制的程序也一样，直接写 test.sh，Linux系统会去PATH（环境变量）里寻找有没有叫test.sh的，而只有
+/bin，/sbin，/usr/bin，/usr/sbin 等在PATH里，你的当前目录通常不在PATH里，所以写成test.sh 是会找不到命令的，要用./test.sh 告诉系统说，就在当前目录找。
 
 案例2：使用root 用户账号创建并执行test2.sh，实现创建一个shelltest用户，并在其家目录中新建文件try.html。
 
@@ -2791,13 +2791,13 @@ Shell 脚本分为简单的写法（简单命令的堆积）和复杂写法（�
 
 变量，先定义后使用
 
-定义形如：`class name="yunwei"`
-使用形如：`echo $class name`
+定义形如：`class_name="yunwei"`
+使用形如：`echo $class_name`
 
 变量就是由2部分组成，一个是变量名（左边），另外一部分是变量的值（右边）变量名和变量值是什么关系？？
 变量名和变量值是使用和被使用关系；我们的变量名来使用变量值；
 
-在使用变量的时候一定需要在变量名前面添加一个s符号，该要求在其他语言中也存在的(例如php)。
+在使用变量的时候一定需要在变量名前面添加一个$符号，该要求在其他语言中也存在的(例如php)。
 
 变量名的规范
 注意，变量名后面的等号左右==不能有空格==，这可能和你熟悉的所有编程语言都不一样。同时，变量名的命名须遵循如下规则：
@@ -2947,7 +2947,7 @@ expr 是一款表达式计算工具，使用它能完成表达式的求值操作
 val=`expr 2 + 2`
 echo“两数之和为：$val"
 两点注意：
-表达式和运算符之间要有空格，例如2+2是不对的，必须写成2+2，这与我们熟悉的大多数编程语言不一样。
+表达式和运算符之间要有空格，例如2+2是不对的，必须写成2 + 2，这与我们熟悉的大多数编程语言不一样。
 完整的表达式要被包含，注意这个字符不是常用的单引号，在Esc键下边。
 ```
 
@@ -3345,6 +3345,57 @@ Primary key(id)
 删除数据表：
 
 <img src="https://pics-1301774945.cos.ap-chengdu.myqcloud.com/20200414002851.png" style="zoom: 33%;" />
+
+#### 索引
+
+您可以在表中创建索引，以便更加快速高效地查询数据。
+
+用户无法看到索引，它们只能被用来加速搜索/查询。
+
+**注释：**更新一个包含索引的表需要比更新一个没有索引的表更多的时间，这是由于索引本身也需要更新。因此，理想的做法是仅仅在常常被搜索的列（以及表）上面创建索引。
+
+##### SQL CREATE INDEX 语法
+
+在表上创建一个简单的索引。允许使用重复的值：
+
+```
+CREATE INDEX index_name
+ON table_name (column_name)
+```
+
+**注释：**"column_name" 规定需要索引的列。
+
+##### SQL CREATE UNIQUE INDEX 语法
+
+在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。
+
+```
+CREATE UNIQUE INDEX index_name
+ON table_name (column_name)
+```
+
+##### CREATE INDEX 实例
+
+本例会创建一个简单的索引，名为 "PersonIndex"，在 Person 表的 LastName 列：
+
+```
+CREATE INDEX PersonIndex
+ON Person (LastName) 
+```
+
+如果您希望以*降序*索引某个列中的值，您可以在列名称之后添加保留字 *DESC*：
+
+```
+CREATE INDEX PersonIndex
+ON Person (LastName DESC)  // 升序用ASC（ascending），降序用DESC（descending）
+```
+
+假如您希望索引不止一个列，您可以在括号中列出这些列的名称，用逗号隔开：
+
+```
+CREATE INDEX PersonIndex
+ON Person (LastName, FirstName)
+```
 
 ### 4、记录/字段操作（重点）
 

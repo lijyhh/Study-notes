@@ -3,7 +3,7 @@
 ####################################################################
 ###This block is used to push Linux Study notes.
   git add .
-  git commit -m $1
+  git commit -m "$*"
   git push -u origin master
   echo ' ' 
   echo 'Study notes has finished.'
