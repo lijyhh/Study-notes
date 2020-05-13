@@ -9,7 +9,7 @@
   echo 'Study notes has finished.'
   echo ' '
   
-  cp -p ./Gvim_Linux/ /c/Users/lijy花花/Desktop/Linux/LinuxCentos
+  cp -r ./Gvim_Linux/ /c/Users/lijy花花/Desktop/Linux/LinuxCentos
   cd /c/Users/lijy花花/Desktop/Linux/LinuxCentos
   git add .
   git commit -m "$*"
