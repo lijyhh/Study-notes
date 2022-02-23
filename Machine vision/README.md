@@ -4,7 +4,7 @@ This directory is used to store some study files about machine vision related to
 ## Download
 If you want to download a singal file, please copy the path of this file in github and paste into this website:[DownGit](https://www.itsvse.com/downgit/#/home?url=)
 
-Steps: image image
+Steps:
 ![image](https://user-images.githubusercontent.com/62192785/155258358-f835a6b0-9602-4ad9-8dd9-32abbcbf65ff.png)
 ![image](https://user-images.githubusercontent.com/62192785/155258435-eff01b08-1f2a-478b-b327-f99fe8fb7c02.png)
 
