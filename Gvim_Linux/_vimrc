@@ -1,0 +1,377 @@
+"设置背景主题
+"colo Candy
+
+set nocompatible
+
+" Vim with all enhancements
+source $VIMRUNTIME/vimrc_example.vim
+
+" Remap a few keys for Windows behavior
+source $VIMRUNTIME/mswin.vim
+
+set expandtab
+"set tabstop=4
+set guifont=Courier_New:h14
+"set guifont=DejaVu\ Sans\ Mono\:h14 
+
+"colorscheme	eighties						 "主题设置
+
+" Set window size
+winpos 100 100
+set lines=25 columns=80
+
+" Use the internal diff if available.
+" Otherwise use the special 'diffexpr' for Windows.
+if &diffopt !~# 'internal'
+  set diffexpr=MyDiff()
+endif
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg1 = substitute(arg1, '!', '\!', 'g')
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg2 = substitute(arg2, '!', '\!', 'g')
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let arg3 = substitute(arg3, '!', '\!', 'g')
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  let cmd = substitute(cmd, '!', '\!', 'g')
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
+
+"自动全屏
+"autocmd GUIEnter * simalt ~x
+
+"设置编码"
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+source $VIMRUNTIME/delmenu.vim 
+source $VIMRUNTIME/menu.vim
+
+"显示行号"
+set nu
+set number
+
+"突出显示当前行"
+"set cursorline
+"set cul          "cursorline的缩写形式"
+
+"突出显示当前列"
+"set cursorcolumn
+"set cuc          "cursorcolumn的缩写形式"
+
+"启用鼠标"
+set mouse=a
+set selection=exclusive
+set selectmode=mouse,key
+
+"显示括号匹配"
+set showmatch
+
+"设置缩进"
+"设置Tab长度为2空格"
+set tabstop=2
+"设置自动缩进长度为2空格"
+set shiftwidth=2
+"继承前一行的缩进方式，适用于多行注释"
+set autoindent
+
+"设置粘贴模式"
+"显示空格和tab键在Vim中通过鼠标右键粘贴时会在行首多出许多缩进和空格，通过set paste可以在插入模式下粘贴内容时不会有任何格式变形、胡乱缩进等问题。"
+set paste
+
+"vimrc显示空格和tab键"
+"Vim编辑器中默认不显示文件中的tab和空格符，通过下面的配置可以获得以下的显示效果，方便定位输入错误。"
+set listchars=tab:>-,trail:-
+
+"设置当文件被改动时自动载入 
+set autoread
+ 
+"quickfix模式
+autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
+
+"代码补全  
+set completeopt=preview,menu 
+
+"自动保存
+set autowrite
+
+"设置上下文行数
+set so=1
+
+" 语法高亮
+set syntax=on
+
+"与windows共享剪贴板
+set clipboard+=unnamed
+
+"取消自动备份及产生swp文件
+set noundofile
+set nobackup
+set nowb
+set noswapfile
+
+
+"为C程序提供自动缩进
+set smartindent
+
+"启动的时候不显示那个援助索马里儿童的提示
+set shortmess=atI
+
+"忽略大小写
+"set ic(ignorecase 的缩写) 忽略大小写
+"set noic(noignorecase 的缩写) 不忽略大小写 
+
+"状态行显示的内容
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}  
+set statusline=\ [POS=%l,%v][%p%%]\ %{strftime(\"20%y/%m/%d\ -\ %H:%M\")}  
+
+
+"自动补全
+" 
+":inoremap ( ()<ESC>i
+":inoremap ) <c-r>=ClosePair(')')<CR>
+" 
+":inoremap { {}<ESC>i
+":inoremap } <c-r>=ClosePair('}')<CR>
+" 
+":inoremap [ []<ESC>i
+":inoremap ] <c-r>=ClosePair(']')<CR>
+"
+":inoremap < < ><ESC>i
+":inoremap > <c-r>=ClosePair('>')<CR>
+"
+":inoremap " ""<ESC>i
+":inoremap ' ' '<ESC>i
+"
+"function! ClosePair(char)
+"    if getline('.')[col('.') - 1] == a:char
+"        return "\<Right>"
+"    else
+"        return a:char
+"    endif
+"endfunction
+
+
+"打开文件类型检测, 加了这句才可以用智能补全
+set completeopt=longest,menu
+
+"""""""""""""""""""""""""""""""新文件标题""""""""""""""""""""""""""""""""""""""""""""""""""
+ 
+"按F4自动插入文件头 
+map <F4> :call SetTitle() <cr>:11 <cr><end>i
+
+"定义函数SetTitle，自动插入文件头 
+func SetTitle() 
+  call append(line(".")-1 , "`timescale 1ns/1ps")
+  call append(line(".")+0 , "//******************************************************************")
+  call append(line(".")+1 , "//") 
+  call append(line(".")+2 , "//*@File Name: ".expand("%"))
+  if expand("%:e") == "v"
+    let tmp1 = "verilog"
+  elseif expand("%:e") == "sv"
+    let tmp1 = "system verilog"
+  elseif expand("%:e") == "c"
+    let tmp1 = "C"
+  elseif expand("%:e") == "cpp"
+    let tmp1 = "C++"
+  elseif expand("%:e") == "txt"
+    let tmp1 = "plain text"
+  else
+    let tmp1 = "NONE"
+  endif
+  call append(line(".")+3 , "//*@File Type: ".expand(tmp1))
+  call append(line(".")+4 , "//*@Version  : 0.0")
+  call append(line(".")+5 , "//*@Author   : Zehua Dong, SIGS")
+  call append(line(".")+6 , "//*@E-mail   : 1285507636@qq.com")
+  call append(line(".")+7 , "//*@Date     : ".strftime("%c"))  
+  call append(line(".")+8 , "//*@Function :  ")  
+  call append(line(".")+9 , "//")
+  call append(line(".")+10, "//*@V0.0     : Initial.")  
+  call append(line(".")+11, "//")
+  call append(line(".")+12, "//******************************************************************") 
+  call append(line(".")+13, "")
+  call append(line(".")+14, "//")
+  call append(line(".")+15, "// Header file")
+  call append(line(".")+16, "`include \"common.vh\"")
+  call append(line(".")+17, "")
+  call append(line(".")+18, "//")
+  call append(line(".")+19, "// Module")
+  call append(line(".")+20, "")
+ 
+  "新建文件后，自动定位到文件末尾
+  autocmd BufNewFile * normal G
+
+endfunc 
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"插件"
+set nocompatible               "去除VIM一致性，必须"
+filetype off                   "必须"
+
+"设置包括vundle和初始化相关的运行时路径"
+set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
+call vundle#begin('$VIM/vimfiles/bundle/')
+
+"启用vundle管理插件，必须"
+Plugin 'VundleVim/Vundle.vim' 
+
+"在此增加其他插件，安装的插件需要放在vundle#begin和vundle#end之间"
+"安装github上的插件格式为 Plugin '用户名/插件仓库名'"
+
+"括号颜色对齐
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'https://github.com/schmich/vim-guifont'
+
+"目录
+Plugin 'preservim/nerdtree'
+Plugin 'preservim/nerdcommenter'
+
+call vundle#end()              
+filetype plugin indent on      "加载vim自带和插件相应的语法和文件类型相关脚本，必须"
+
+autocmd VimEnter * RainbowParenthesesToggle
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"自动加载NERDTree
+"autocmd VimEnter * NERDTree
+" 设置NerdTree
+map <F3> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
+
+
+""""""""""""""""""""""""""""""""自定义命令"""""""""""""""""""""""""""""""""""
+
+"显示时间
+":ab xtime <c-r>=strftime("%Y-%m-%d")<cr>
+:ab xtime <c-r>=strftime("%Y-%m-%d %H:%M:%S")<cr>
+
+""""""""""""""""""""""""""""""""Module"""""""""""""""""""""""""""""""""""
+
+"模块定义
+:ab MBmk module (<enter>clk                  <enter>rst_n            <enter>);<enter><enter>input                           clk                     <enter>input                           rst_n                <enter><enter><enter><enter><enter><enter><enter><enter><enter><enter><enter><enter><enter><enter><enter>endmodule
+
+"组合逻辑
+:ab Zuhe always @(*) begin<Enter>if(  )begin<Enter>end<Enter>else begin<Enter>end<Enter>end
+
+"时序逻辑
+:ab Shixu always @( posedge clk or negedge rst_n ) begin<enter>if( ~rst_n ) begin<enter>end<enter>else begin<enter>end<enter>end      
+      
+"计数器
+:ab MBjsq `define   COUNT_BITS       8<enter><enter>reg    [ `COUNT_BITS-1:0 ] count;<enter><enter>always @( posedge clk or negedge rst_n ) begin<enter>if( ~rst_n ) begin<enter>count <= #`DEL `COUNT_BITS'd0;<enter>end<enter>else if( count ) begin<enter>count <= #`DEL `COUNT_BITS'd0;<enter>end<enter>else begin<enter>count <= #`DEL count + `COUNT_BITS'd1;<enter>end<enter>end
+     
+"状态机
+:ab MBfsm reg       [2:0]   cs;<enter>reg       [2:0]   ns;<enter>parameter [2:0]  IDLE   = 3'b000,<enter>S1     = 3'b001,<enter>S2     = 3'b010,<enter>ERROR  = 3'b100;<enter>always @( posedge clk or negedge rst_n ) begin<enter>if ( !rst_n ) begin<enter>cs <= IDLE;<enter>end<enter>else begin<enter>cs <= ns;<enter>end<enter>end<enter><enter>always @( * ) begin<enter>ns = IDLE;<enter>case ( cs )<enter>IDLE: begin<enter>if (  ) begin<enter>ns = S1;<enter>end<enter>else begin<enter>ns = IDLE;<enter>end<enter>end<enter>S1: begin<enter>if (  ) begin<enter>ns = S2;<enter>end <enter>else begin <enter>ns = S1;<enter>end<enter>end <enter>S2: begin <enter>  if (  ) begin<enter>ns = ERROR; <enter>end <enter>else begin <enter>ns = S2;<enter>end<enter>end<enter>ERROR: begin <enter>  if (  ) begin<enter>ns = IDLE; <enter>end<enter>else begin<enter>ns = ERROR;<enter>end<enter>end <enter>endcase <enter>end<enter><enter>always @( posedge clk or negedge rst_n ) begin <enter>if ( !rst_n ) begin <enter>end<enter>else begin <enter>case ( ns )<enter>endcase <enter>end <enter>end      
+
+"边沿检测器
+:ab MBby reg     _en_q;<enter>wire    _en_flag;<enter><enter>always @( posedge clk or negedge rst_n ) begin<enter>if( ~rst_n ) begin<enter>_en_q <= #`DEL 1'b0;<enter>end<enter>else begin<enter>_en_q <= #`DEL _en;<enter>end<enter>end<enter>assign _en_flag = ( ~_en_q ) && ( _en );
+
+"同步器
+:ab MBtongbuqi  reg rst_s1;<enter>reg rst_s2;<enter><enter>always @ (posedge clk or negedge rst_n) begin<enter>if (!rst_n) begin<enter>rst_s1 <= 1'b0;<enter>rst_s2 <= 1'b0;<enter>end<enter>else begin<enter>rst_s1 <= 1'b1	;<enter>rst_s2 <= rst_s1;<enter>end<enter>end
+
+"触发器模板
+:ab MBdff module dff #( parameter SIZE = 64 )(<enter>  clk    ,<enter>rst_n  ,<enter>D      ,<enter>Q<enter>);<enter><enter>input                     clk    ;<enter>input                     rst_n  ;<enter>input   [SIZE - 1 : 0]    D      ;<enter>output  [SIZE - 1 : 0]    Q      ;<enter><enter>wire                      clk    ;<enter>wire                      rst_n  ;<enter>wire    [SIZE - 1 : 0]    D      ;<enter>reg     [SIZE - 1 : 0]    Q      ;<enter><enter>always @( posedge clk or negedge rst_n ) begin<enter>if( ~rst_n ) begin<enter>Q <= 'b0;<enter>end<enter>else begin<enter>Q <= D;<enter>end<enter>end<enter><enter>endmodule<enter>
+
+"触发器例化tb_
+:ab LHdff dff #(  ) dff_dut1(<enter>.clk  ( clk    ),<enter>.rst_n( rst_n  ),<enter>.D    (  ),<enter>.Q    (  )<enter>);
+
+"共同的头文件
+:ab MBc `ifndef COMMON_HEADER <cr>`define COMMON_HEADER<cr><cr>`define CYCLE 10<cr>`define HALF_CYCLE (CYCLE/2)<cr><cr>`define TB_BEGIN $display("=== BEGIN TESTBENCH %m ===\n");<cr>`define TB_END #`CYCLE $display("\n===== END TESTBENCH %m ===");<cr><cr>`endif
+
+"""""""""""""""""""""""""""""""""预编译""""""""""""""""""""""""""""""""""
+"延时宏定义
+:ab YBYys `define DEL 1
+
+"仿真精度
+:ab YBYjd `timescale 1ns/1ps
+
+""""""""""""""""""""""""""""""""Testbench""""""""""""""""""""""""""""""""""
+
+"产生时钟
+:ab TBsz initial begin<enter>tb_clk = 0;<enter>end<enter>always #`HALF_CYCLE tb_clk = ~tb_clk;
+
+"产生复位信号
+:ab TBfw initial begin<enter>tb_rst_n = 1;<enter>repeat(1) @( posedge tb_clk ) #1;<enter>tb_rst_n = 0;<enter>repeat(1) @( posedge tb_clk ) #1;<enter>tb_rst_n = 1;<enter>end
+
+"延时
+:ab TBys repeat( 1 ) @( posedge tb_clk ) #1;
+
+"波形图
+:ab TBbxt initial begin<enter>$dumpfile(" .vcd ");<enter>$dumpvars();<enter>end
+
+"随机数
+:ab TBsjs   integer   seed;<enter>reg[31:0] num1;<enter>initial begin<enter>if ( !$value$plusargs("seed+%d", seed) ) begin<enter>seed = 0;<enter>end<enter>@(posedge tb_clk);<enter>#1;<enter>num1 = $random(seed);<enter>end
+
+"取对数，用来求位宽
+:ab TBds function integer clogb2;<enter>input [31:0] value;<enter>begin<enter>value = value - 1;<enter>for (clogb2 = 0; value > 0; clogb2 = clogb2 + 1) begin<enter>value = value >> 1;<enter>end<enter>end<enter>endfunction 
+
+"打开文件
+:ab TBwj integer                     FILE;<enter>  FILE=$fopen(" .txt ", "a+");<enter>$fdisplay(FILE, " = %h", );<enter>$fclose(FILE);
+
+"TB模板
+:ab TBmb module _tb();<enter><enter>  reg                 tb_clk                         <enter>reg                 tb_rst_n                <enter><enter>task delay;<enter>input [31:0] num;<enter>begin<enter>repeat(num) @(posedge tb_clk);<enter>#1;<enter>end<enter>endtask<enter><enter>initial begin<enter>tb_clk = 0;<enter>end<enter>always #`HALF_CYCLE tb_clk = ~tb_clk;<enter><enter>initial begin<enter>tb_rst_n = 1;<enter>delay(1);<enter>tb_rst_n = 0;<enter>delay(1);<enter>tb_rst_n = 1;<enter>end<enter><enter>initial begin<enter>$dumpfile(" _tb.vcd ");<enter>$dumpvars();<enter>end<enter><enter>initial begin<enter>`TB_BEGIN<enter>delay(3);<enter><enter>`TB_END<enter>$finish;<enter>end<enter><enter><enter>endmodule
+
+:ab TBb `TB_BEGIN
+:ab TBe `TB_END
+
+"断言assert
+:ab TBas assert( tb_ ==  ) $strobe("%0d, !!TEST SUCCESS!!", $time);<enter>else $error("tb_ = %0d", tb_);
+
+:ab TBin initial begin<CR>`TB_BEGIN<CR><CR>`TB_END<CR>$finish;<CR>end
+
+
+
+
+""""""""""""""""""""""""""""""""注释""""""""""""""""""""""""""""""""""""""""
+"注释头
+:ab ZSt //*************************************************************<enter><enter>*@File name: <enter><enter>*@File type: <enter><enter>*@Version  : 0.0.1<enter><enter>*@Author   : Zehua Dong, HITWH<enter><enter>*@E-mail   : hitdongzh@163.com<enter><enter>*@Date     : <enter>*@Function : <enter><enter>*************************************************************<enter><enter> Head files<enter>`include "common.v"<enter><enter> Module definition
+
+"段注释
+:ab ZSk /////////////////////////////////////////////////////////////<enter>*Function Description:<enter>*  <enter>*  <enter>///////////////////////////////////////////////////////////
+
+"端口注释
+:ab ZSdk   //===========================================================<enter>* Input and output ports<enter>* Internal signals<enter>===========================================================
+
+"
+:ab ZS //*******************************<enter><enter>*******************************
+
+
+
+
+""""""""""""""""""""""""""""""""任务""""""""""""""""""""""""""""""""""""""""
+
+"延时任务
+:ab RWys task delay;<enter>input [31:0] num;<enter>begin<enter>repeat(num) @(posedge tb_clk);<enter>#1;<enter>end<enter>endtask
+
+"任务模板
+:ab RWmb task ;<enter>input [ :0] <enter>begin<enter>end<enter>endtask
+
+
+
+
+
+
+
